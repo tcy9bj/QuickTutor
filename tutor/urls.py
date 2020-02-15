@@ -1,9 +1,13 @@
-from django.urls import path
+from django.urls import path, include
 
 from . import views
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('home/', views.home, name='home'),
     path('login/', views.login, name='login'),
+    #path('login/', views.LoginView.as_view(), name='login'),
     path('profile/', views.profile, name='profile'),
+    path('accounts/', include('allauth.urls')),
+    path('', TemplateView.as_view(template_name='tutor/login.html')),
 ]

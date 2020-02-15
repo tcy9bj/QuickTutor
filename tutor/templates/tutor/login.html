@@ -1,9 +1,31 @@
+<!-- Bootstrap -->
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 
 <body>
-    <div>
-        <img src="../../static/tutor/images/library.jpeg" class="img-fluid" alt="Responsive image">
+    <!-- Login Page and Logo -->
+    <div class="view" style="height: 100%; opacity: 0.75; 
+        background-image: linear-gradient(to right, rgb(5, 79, 144), rgba(255, 255, 255, 0)),
+            url(../../static/tutor/images/library.jpeg); 
+        background-repeat: no-repeat; background-size: cover; background-position: center center;">
+
+        <div class="container">
+            <div class="row">
+                <!-- Logo -->
+                <div class="col-sm">
+                    One of three columns
+                </div>
+                <div class="col-sm">
+                    One of three columns
+                </div>
+                <!-- Login -->
+                <div class="col-sm">
+                    <a href="{% provider_login_url 'google' %}">Login with Google</a>
+                </div>
+            </div>
+        </div>
+
     </div>
 </body>
