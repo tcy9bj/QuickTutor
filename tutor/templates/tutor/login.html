@@ -1,3 +1,5 @@
+<!--Google Login-->
+{% load socialaccount %}
 <!-- Bootstrap -->
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -7,25 +9,41 @@
 <body>
     <!-- Login Page and Logo -->
     <div class="view" style="height: 100%; opacity: 0.75; 
-        background-image: linear-gradient(to right, rgb(5, 79, 144), rgba(255, 255, 255, 0)),
+        background-image: linear-gradient(to bottom, rgb(5, 79, 144), rgba(255, 255, 255, 0)),
             url(../../static/tutor/images/library.jpeg); 
         background-repeat: no-repeat; background-size: cover; background-position: center center;">
 
+        <div class="card mx-auto" style="width: 30%; opacity: .80;">
+            <img class="card-img-top" src="../../static/tutor/images/quickTutorlogo-removebg-preview.png">
+            <div class="card-body text-center">
+                <p>Get Help - Give Help</p>
+                <a href="{% provider_login_url 'google' %}">
+                    <button type="button" class="btn-lg btn-primary">Sign In to Get Started!</button>
+                </a>
+            </div>
+        </div>
+        
+
+        <!--
         <div class="container">
             <div class="row">
-                <!-- Logo -->
                 <div class="col-sm">
-                    One of three columns
+                    <h1>Find Help - Get Help - Give Help.</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <img src="../../static/tutor/images/quickTutorlogowhite.png" style="width:75%">
                 </div>
                 <div class="col-sm">
-                    One of three columns
-                </div>
-                <!-- Login -->
-                <div class="col-sm">
-                    <a href="{% provider_login_url 'google' %}">Login with Google</a>
+                    {% if user.is_authenticated %}
+                    <p>Welcome {{ user.username }} !!!</p>
+                    {% else %}
+                    <a href="{% provider_login_url 'google' %}">Sign Up</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
-
+    -->
     </div>
 </body>

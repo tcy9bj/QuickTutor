@@ -8,6 +8,7 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     #path('login/', views.LoginView.as_view(), name='login'),
     path('profile/', views.profile, name='profile'),
+
+    #google login
     path('accounts/', include('allauth.urls')),
-    path('', TemplateView.as_view(template_name='tutor/login.html')),
 ]
