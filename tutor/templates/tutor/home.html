@@ -6,9 +6,13 @@
 		{% for tutor in tutors %}
 			{% if tutor.active %}
 				{% if tutor.major2 %}
-					<h3>{{ tutor.name }} <small>Majors: {{tutor.major}}, {{tutor.major2}}</small></h3>
+					<div class="content-section">
+						<h3><a class="tutor-listing" href="{% url 'profile' %}">{{ tutor.name }} <small>Majors: {{tutor.major}}, {{tutor.major2}}</small></a></h3>
+					</div>
 				{% else %}
-					<h3>{{ tutor.name }} <small>Major: {{tutor.major}}</small></h3>
+					<div class="content-section">
+						<h3>{{ tutor.name }} <small>Major: {{tutor.major}}</small></h3>
+					</div>
 				{% endif%}
 			{% endif %}
 		{% endfor %}

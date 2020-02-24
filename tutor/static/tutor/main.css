@@ -30,7 +30,6 @@ ul {
 }
 
 .section-3{
-  margin-left: 5%;
   margin-top: 15px;
 }
 
@@ -55,15 +54,14 @@ ul {
   padding: 10px 20px;
   border: 1px solid #dddddd;
   border-radius: 3px;
-  margin-bottom: 20px;
-  margin-top: 15px;
+  margin-right: 10px;
 }
 
-.article-title {
+.tutor-listing {
   color: #444444;
 }
 
-a.article-title:hover {
+a.tutor-listing:hover {
   color: #428bca;
   text-decoration: none;
 }
