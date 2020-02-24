@@ -7,35 +7,17 @@
 </head>
 
 <body>
-    <!--
-    <!-- Login Page and Logo
-    <div class="view" style="height: 100%; opacity: 0.75; 
-        background-image: linear-gradient(to bottom, rgb(34, 0, 187), rgba(255, 255, 255, 0)),
-            url(../../static/tutor/images/library.jpeg); 
-        background-repeat: no-repeat; background-size: cover; background-position: center center;">
-
-        <div class="card mx-auto" style="width: 30%; opacity: .90;">
-            <img class="card-img-top" src="../../static/tutor/images/quickTutorlogo-removebg-preview.png">
-            <div class="card-body text-center">
-                <p>Get Help - Give Help</p>
-                <a href="{% provider_login_url 'google' %}">
-                    <button type="button" class="btn-lg btn-primary">Sign In to Get Started!</button>
-                </a>
-            </div>
-        </div>
-    </div>
--->
     <div class="view" style="height: 100%; opacity: 0.75; 
     background-image: linear-gradient(to bottom, rgb(34, 0, 187), rgba(255, 255, 255, 0)),
         url(../../static/tutor/images/library.jpeg); 
     background-repeat: no-repeat; background-size: cover; background-position: center center;">
         
-        <img class="mx-auto" style="display: block;" src="../../static/tutor/images/quickTutorlogowhite.png">
-        <p class="text-center" style="display: block; font-size: 60px; font-weight: bold; font-family: ubuntu; font-style: italic; color: white;">
+        <img class="mx-auto" style="display: block; max-height: 50%;" src="../../static/tutor/images/quickTutorlogowhite.png">
+        <p class="text-center" style="display: block; font-size: 4rem; font-weight: bold; font-family: ubuntu, arial; font-style: italic; color: white;">
             Get Help - Give Help
         </p>
         <a type="button" class="btn-light mx-auto" href="{% provider_login_url 'google' %}"
-            style="display: block; text-align: center; max-width: 300px; border-radius: 40px; font-size: 25px; padding: 15px; font-family: ubuntu; font-style: italic;">
+            style="display: block; text-align: center; max-width: 20%; border-radius: 40px; font-size: 1.5rem; padding: 15px; font-family: ubuntu, Arial; font-style: italic;">
             Sign In to Get Started
         </a>
     </div>
