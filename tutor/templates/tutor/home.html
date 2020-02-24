@@ -2,7 +2,7 @@
 
 {% block content %}
 	<h1><u>Active Tutors</u></h1>
-	{% if tutors %}
+	{% if tutors.length > 0 %}
 		{% for tutor in tutors %}
 			{% if tutor.active %}
 				{% if tutor.major2 %}
