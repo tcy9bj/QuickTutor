@@ -1,4 +1,18 @@
 {% extends "tutor/base.html" %}
-{% block title %}
-  <h1>Home Page</h1>
-{% endblock title %}
+
+{% block content %}
+	<h1><u>Active Tutors</u></h1>
+	{% if tutors %}
+		{% for tutor in tutors %}
+			{% if tutor.active %}
+				{% if tutor.major2 %}
+					<h3>{{ tutor.name }} <small>Majors: {{tutor.major}}, {{tutor.major2}}</small></h3>
+				{% else %}
+					<h3>{{ tutor.name }} <small>Major: {{tutor.major}}</small></h3>
+				{% endif%}
+			{% endif %}
+		{% endfor %}
+	{% else %}
+		<p>There currently aren't any active tutors</p>
+	{% endif %}
+{% endblock content %}
