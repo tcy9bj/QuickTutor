@@ -1,4 +1,197 @@
 {% extends "tutor/base.html" %}
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+{% load static %}
+
 {% block title %}
-    <h1>Profile Page</h1>
-{% endblock title %}
+<link rel="stylesheet" type="text/css" href="{% static 'tutor/profile.css' %}">
+
+<div class="container">
+<div class="row">
+      <div class="col-xs-12 col-sm-9">
+
+        <!-- User profile -->
+        <div class="panel panel-default">
+          <div class="panel-heading">
+          <h4 class="panel-title">User profile</h4>
+          </div>
+          <div class="panel-body">
+            <div class="profile__avatar">
+              <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="...">
+            </div>
+            <div class="profile__header">
+              <h4>Mark Sherriff <small>Professor</small></h4>
+              <p class="text-muted">
+                I love teaching and video games!
+              </p>
+              <p>
+                <a href="#">http://cs3240.cs.virginia.edu/</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- User info -->
+        <div class="panel panel-default">
+          <div class="panel-heading">
+          <h4 class="panel-title">User info</h4>
+          </div>
+          <div class="panel-body">
+            <table class="table profile__table">
+              <tbody>
+                <tr>
+                  <th><strong>Major(s)</strong></th>
+                  <td>Computer Science</td>
+                </tr>
+                <tr>
+                  <th><strong>Email</strong></th>
+                  <td>sherriff@virginia.edu</td>
+                </tr>
+                <tr>
+                  <th><strong>Classes</strong></th>
+                  <td>CS 3240, CS 3330, CS 4102</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Community -->
+        <div class="panel panel-default">
+          <div class="panel-heading">
+          <h4 class="panel-title">Community</h4>
+          </div>
+          <div class="panel-body">
+            <table class="table profile__table">
+              <tbody>
+                <tr>
+                  <th><strong>Sessions</strong></th>
+                  <td>124</td>
+                </tr>
+                <tr>
+                  <th><strong>Member since</strong></th>
+                  <td>Jan 01, 2016</td>
+                </tr>
+                <tr>
+                  <th><strong>Status</strong></th>
+                  <td>Active</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Latest posts -->
+        <div class="panel panel-default">
+          <div class="panel-heading">
+          <h4 class="panel-title">Latest Reviews</h4>
+          </div>
+          <div class="panel-body">
+            <div class="profile__comments">
+              <div class="profile-comments__item">
+                <div class="profile-comments__controls">
+                  <a href="#"><i class="fa fa-share-square-o"></i></a>
+                  <a href="#"><i class="fa fa-edit"></i></a>
+                  <a href="#"><i class="fa fa-trash-o"></i></a>
+                </div>
+                <div class="profile-comments__avatar">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="...">
+                </div>
+                <div class="profile-comments__body">
+                  <h5 class="profile-comments__sender">
+                    Jane Doe <small>2 hours ago</small>
+                  </h5>
+                  <div class="profile-comments__content">
+                    Very funny!
+                  </div>
+                </div>
+              </div>
+              <div class="profile-comments__item">
+                <div class="profile-comments__controls">
+                  <a href="#"><i class="fa fa-share-square-o"></i></a>
+                  <a href="#"><i class="fa fa-edit"></i></a>
+                  <a href="#"><i class="fa fa-trash-o"></i></a>
+                </div>
+                <div class="profile-comments__avatar">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="...">
+                </div>
+                <div class="profile-comments__body">
+                  <h5 class="profile-comments__sender">
+                    Richard Roe <small>5 hours ago</small>
+                  </h5>
+                  <div class="profile-comments__content">
+                    Great guy, 10/10!
+                  </div>
+                </div>
+              </div>
+              <div class="profile-comments__item">
+                <div class="profile-comments__controls">
+                  <a href="#"><i class="fa fa-share-square-o"></i></a>
+                  <a href="#"><i class="fa fa-edit"></i></a>
+                  <a href="#"><i class="fa fa-trash-o"></i></a>
+                </div>
+                <div class="profile-comments__avatar">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="...">
+                </div>
+                <div class="profile-comments__body">
+                  <h5 class="profile-comments__sender">
+                    John Doe <small>1 day ago</small>
+                  </h5>
+                  <div class="profile-comments__content">
+                    Nice!
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-xs-12 col-sm-3">
+
+        <!-- Contact user -->
+        <p>
+          <a href="#" class="profile__contact-btn btn btn-lg btn-block btn-info" data-toggle="modal" data-target="#profile__contact-form">
+            Request Help
+          </a>
+        </p>
+
+        <hr class="profile__contact-hr">
+
+        <!-- Contact info -->
+        <div class="profile__contact-info">
+          <div class="profile__contact-info-item">
+            <div class="profile__contact-info-icon">
+              <i class="fa fa-phone"></i>
+            </div>
+            <div class="profile__contact-info-body">
+              <h5 class="profile__contact-info-heading">Message</h5>
+              (434)000-0000
+            </div>
+          </div>
+          <div class="profile__contact-info-item">
+            <div class="profile__contact-info-icon">
+              <i class="fa fa-phone"></i>
+            </div>
+          </div>
+          <div class="profile__contact-info-item">
+            <div class="profile__contact-info-icon">
+              <i class="fa fa-envelope-square"></i>
+            </div>
+          </div>
+          <div class="profile__contact-info-item">
+            <div class="profile__contact-info-icon">
+              <i class="fa fa-map-marker"></i>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+</div>
+
+{% endblock %}
