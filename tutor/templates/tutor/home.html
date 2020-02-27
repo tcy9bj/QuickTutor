@@ -2,19 +2,17 @@
 
 {% block content %}
 	<h1><u>Active Tutors</u></h1>
-	{% if tutors.length > 0 %}
+	{% if tutors %}
 		{% for tutor in tutors %}
-			{% if tutor.active %}
-				{% if tutor.major2 %}
-					<div class="content-section">
-						<h3><a class="tutor-listing" href="{% url 'profile' %}">{{ tutor.name }} <small>Majors: {{tutor.major}}, {{tutor.major2}}</small></a></h3>
-					</div>
-				{% else %}
-					<div class="content-section">
-						<h3>{{ tutor.name }} <small>Major: {{tutor.major}}</small></h3>
-					</div>
-				{% endif%}
-			{% endif %}
+			{% if tutor.major2 %}
+				<div class="content-section">
+					<h3><a class="tutor-listing" href="{% url 'profile' %}">{{ tutor.first_name }} {{ tutor.last_name }} <small>Majors: {{tutor.major}}, {{tutor.major2}}</small></a></h3>
+				</div>
+			{% else %}
+				<div class="content-section">
+					<h3><a class="tutor-listing" href="{% url 'profile' %}">{{ tutor.first_name }} {{ tutor.last_name }} <small>Major: {{tutor.major}}</small></a></h3>
+				</div>
+			{% endif%}
 		{% endfor %}
 	{% else %}
 		<p>There currently aren't any active tutors</p>
