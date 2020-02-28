@@ -49,23 +49,8 @@
   </div>
 
   <main role="main" class="container">
-    <div class="row">
-      <div class="col-md-7">
-        <div class="section-3 box">
-          {% block content %}{% endblock %}
-        </div>
-      </div>
-      <div class="col-md-5">
-        <div class="content-section section-3">
-          <h3>Profile</h3>
-          <p class='text-muted'>The profile of the tutor you are viewing will appear here.
-            <ul class="list-group">
-              <li class="list-group-item list-group-item-light">Their info</li>
-            </ul>
-          </p>
-        </div>
-      </div>
-    </div>
+    {% block content %}
+    {% endblock %}
   </main>
 </body>
 
