@@ -1,4 +1,4 @@
-{% load static%}
+{% load static %}
 
 <!DOCTYPE html>
 <html>
@@ -10,95 +10,70 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <!-- Local CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'tutor/main.css' %}">
+
+    <!-- Site title (shown in tab) -->
+    <title>Quick Tutor</title>
 </head>
 
-<div class="section-1 box"></div>
-<div class="section-2 box">
-  <header class="site-header">
-    <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
-      <div class="container">
-        <a class="navbar-brand mr-4" href="{% url 'home' %}">
-          <img class="resize" src="../../static/tutor/images/quickTutorlogowhite.png" alt="Logo">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarToggle">
-          <div class="navbar-nav mr-auto">
-            <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
-            <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
-          </div>
-          <!-- Navbar Right Side -->
-          <div class="navbar-nav">
-            <a class="nav-item nav-link" href="#">Login</a>
-            <a class="nav-item nav-link" href="#">Register</a>
-          </div>
-        </div>
-      </div>
-    </nav>
-  </header>
-</div>
-<div class="section-3 box">
-  <body>
-  <h1>
-    {% block title %}{% endblock %}
-  </h1>
-<p>
+<body>
+  <!-- Header Picture -->
+  <div class="section-1 box"></div>
 
-</p>
-</body>
-
-</div>
-
-
-</div>
-<style>
-  *{
-    padding: 0px;
-    margin: 0px;
-    box-sizing: border-box;
-  }
-  .box{
-    height: auto;
-    width: 100%;
-  }
-  .section-1{
-    height: 50vh;
-    background-image: url(../../static/tutor/images/library.jpeg);
-    background-attachment: fixed;
-    background-size: cover;
-  }
-</style>
-      <!-- side bar
-      <main role="main" class="container">
-        <div class="row">
-          <div class="col-md-8">
-            {% block content %}{% endblock %}
-          </div>
-          <div class="col-md-4">
-            <div class="content-section">
-              <h3>Our Sidebar</h3>
-              <p class='text-muted'>You can put any information here you'd like.
-                <ul class="list-group">
-                  <li class="list-group-item list-group-item-light">Latest Posts</li>
-                  <li class="list-group-item list-group-item-light">Announcements</li>
-                  <li class="list-group-item list-group-item-light">Calendars</li>
-                  <li class="list-group-item list-group-item-light">etc</li>
-                </ul>
-              </p>
+  <!-- Navbar -->
+  <div class="section-2 box">
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-blue fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="{% url 'home' %}">
+            <img class="resize" src="../../static/tutor/images/quickTutorlogowhite.png" alt="Logo">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
+              <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              <a class="nav-item nav-link" href="#">Login</a>
+              <a class="nav-item nav-link" href="#">Register</a>
             </div>
           </div>
         </div>
-      </main>
-      -->
+      </nav>
+    </header>
+  </div>
 
+  <main role="main" class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <div class="section-3 box">
+          {% block content %}{% endblock %}
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="content-section section-3">
+          <h3>Profile</h3>
+          <p class='text-muted'>The profile of the tutor you are viewing will appear here.
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-light">Their info</li>
+            </ul>
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <!--
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-      -->
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<!--
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  -->
 </html>
