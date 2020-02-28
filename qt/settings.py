@@ -41,9 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #Google login
-    'django.contrib.sites', 
+    'django.contrib.sites',
     'allauth',
-    'allauth.account', 
+    'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
 ]
