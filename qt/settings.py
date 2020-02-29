@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'crispy_forms',
+    'users.apps.UsersConfig',
     'tutor.apps.TutorConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -136,7 +138,7 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 
-LOGIN_REDIRECT_URL = '/tutor/profile'
+LOGIN_REDIRECT_URL = '/tutor/home'
 
 # SOCIALACCOUNT_PROVIDERS = {
 #     'google': {
@@ -149,6 +151,9 @@ LOGIN_REDIRECT_URL = '/tutor/profile'
 #         }
 #    }
 # }
+
+# Tells crispy_forms to use bootstrap4 by default
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
