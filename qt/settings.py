@@ -151,4 +151,4 @@ LOGIN_REDIRECT_URL = '/tutor/profile'
 # }
 
 # Activate Django-Heroku.
-django_heroku.settings(locals())
+django_heroku.settings(locals(), test_runner=False)
