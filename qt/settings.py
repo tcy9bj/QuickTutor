@@ -26,7 +26,7 @@ SECRET_KEY = '$firf(+7np&85ks9u3=k2%7jfpn)7f!n8dmd)y+*^&h-eoor-l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -88,8 +88,8 @@ DATABASES = {
         'NAME': 'quicktutor',
         'USER': 'quicktutor',
         'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'HOST': '',
+        'PORT': '',
     }
 }
 
