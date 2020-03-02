@@ -29,7 +29,7 @@ SECRET_KEY = '$firf(+7np&85ks9u3=k2%7jfpn)7f!n8dmd)y+*^&h-eoor-l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -88,10 +88,10 @@ WSGI_APPLICATION = 'qt.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'quicktutor',
-        'USER': 'quicktutor',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
+        'NAME': 'dfj0d1qg7h8f48',
+        'USER': 'mlejdaxfnihiyi',
+        'PASSWORD': '135afe1f05fce8cff83d789a067f8d2117a390aaf60a425f07fcadce15890f10',
+        'HOST': 'ec2-52-45-14-227.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
