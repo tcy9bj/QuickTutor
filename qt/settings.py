@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-import django_heroku
+if 'HEROKU' in os.environ:
+    import django_heroku
+    # Activate Django-Heroku.
+    django_heroku.settings(locals(), test_runner=False)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -136,6 +139,7 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 
+
 LOGIN_REDIRECT_URL = '/tutor/profile'
 
 # SOCIALACCOUNT_PROVIDERS = {
@@ -150,5 +154,4 @@ LOGIN_REDIRECT_URL = '/tutor/profile'
 #    }
 # }
 
-# Activate Django-Heroku.
-django_heroku.settings(locals())
+
