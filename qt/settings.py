@@ -33,8 +33,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'crispy_forms',
-    'users.apps.UsersConfig',
-    'tutor.apps.TutorConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -48,6 +46,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+
+    'users.apps.UsersConfig',
+    'tutor.apps.TutorConfig',
 ]
 
 MIDDLEWARE = [
@@ -137,6 +138,9 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SITE_ID = 1
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
 
 LOGIN_REDIRECT_URL = '/tutor/home'
 

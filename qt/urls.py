@@ -17,7 +17,15 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-	path('users/', include('users.urls')),
+    # Main App
 	path('tutor/', include('tutor.urls')),
+
+    # User Management
+    path('users/', include('users.urls')),
+
+    # Google Login
+    #path('accounts/', include('allauth.urls')),
+
+    # Django Admin
     path('admin/', admin.site.urls),
 ]
