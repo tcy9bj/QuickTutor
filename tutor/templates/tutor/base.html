@@ -19,7 +19,7 @@
 
 <body>
   <!-- Header Picture -->
-  <div class="section-1 box"></div>
+  <header class="section-1 box"></header>
 
   <!-- Navbar -->
   <div class="section-2 box">
@@ -39,8 +39,7 @@
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
-              <a class="nav-item nav-link" href="#">Login</a>
-              <a class="nav-item nav-link" href="#">Register</a>
+              <a id="logout" href="{% url 'account_logout' %}" style="color: white;">Logout</a>
             </div>
           </div>
         </div>
@@ -51,9 +50,16 @@
   <main role="main" class="container">
     {% if messages %}
       {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-          {{ message }}
-        </div>
+        {% if message == "You have signed out." %}
+
+        {% else %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ message }}
+          </div>
+        {% endif %}
       {% endfor %}
     {% endif %}
     {% block content %}
