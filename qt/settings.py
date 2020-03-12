@@ -141,6 +141,7 @@ SITE_ID = 1
 
 
 LOGIN_REDIRECT_URL = '/tutor/profile'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/tutor/login'
 
 # SOCIALACCOUNT_PROVIDERS = {
 #     'google': {
