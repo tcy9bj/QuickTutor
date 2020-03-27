@@ -85,14 +85,26 @@ WSGI_APPLICATION = 'qt.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'dfj0d1qg7h8f48',
+#         'USER': 'mlejdaxfnihiyi',
+#         'PASSWORD': '135afe1f05fce8cff83d789a067f8d2117a390aaf60a425f07fcadce15890f10',
+#         'HOST': 'ec2-52-45-14-227.compute-1.amazonaws.com',
+#         'PORT': '5432',
+#         #'HOST': 'localhost',
+#         #'PORT': '',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dfj0d1qg7h8f48',
-        'USER': 'mlejdaxfnihiyi',
-        'PASSWORD': '135afe1f05fce8cff83d789a067f8d2117a390aaf60a425f07fcadce15890f10',
-        'HOST': 'ec2-52-45-14-227.compute-1.amazonaws.com',
-        'PORT': '5432',
+        'NAME': 'qt',
+        'USER': 'django',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
