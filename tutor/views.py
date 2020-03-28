@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import generic
 
-from .models import Profile
+from users.models import Profile
 
 def home(request):
 	tutors = Profile.objects.filter(active=True)
