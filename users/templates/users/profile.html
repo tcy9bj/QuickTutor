@@ -19,16 +19,16 @@
           <h1>User Profile</h1> <!--  class="panel-title" *removed from this tag -->
           </div>
           <div class="media">
-            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" alt="...">
+            <img class="rounded-circle account-img" src="{{ profile.image.url }}" alt="...">
             <div class="media-body">
-              <h4>{{ user.profile.first_name }} {{ user.profile.last_name }}</h4>
-              {% if user.profile.major2 %}
-                <h4><small>Majors: {{ user.profile.major }}, {{ user.profile.major2 }}</small></h4>
+              <h4>{{ profile.first_name }} {{ profile.last_name }}</h4>
+              {% if profile.major2 %}
+                <h4><small>Majors: {{ profile.major }}, {{ profile.major2 }}</small></h4>
               {% else %}
-                <h4><small>Major: {{ user.profile.major }}</small></h4>
+                <h4><small>Major: {{ profile.major }}</small></h4>
               {% endif %}
               <p class="text-muted">
-                {{ user.profile.description }}
+                {{ profile.description }}
               </p>
             </div>
           </div>
@@ -44,15 +44,15 @@
               <tbody>
                 <tr>
                   <th><strong>Major(s)</strong></th>
-                  {% if user.profile.major2 %}
-                    <td>{{ user.profile.major }}, {{ user.profile.major2 }}</td>
+                  {% if profile.major2 %}
+                    <td>{{ profile.major }}, {{ profile.major2 }}</td>
                   {% else %}
-                    <td>{{ user.profile.major }}</td>
+                    <td>{{ profile.major }}</td>
                   {% endif %}
                 </tr>
                 <tr>
                   <th><strong>Email</strong></th>
-                  <td> {{user.profile.email}} </td>
+                  <td> {{ profile.email }} </td>
                 </tr>
                 <tr>
                   <th><strong>Classes</strong></th>

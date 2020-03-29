@@ -7,7 +7,6 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('login/', views.login, name='login'),
     #path('login/', views.LoginView.as_view(), name='login'),
-    path('profile/', views.profile, name='profile'),
 
     #google login
     path('accounts/', include('allauth.urls')),
