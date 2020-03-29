@@ -4,7 +4,7 @@
 *.pyc
 __pycache__
 db.sqlite3
-media
+# media (uncomment this line for real deployment; delete what's in parentheses)
 
 # Backup files # 
 *.bak 

@@ -35,7 +35,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'tutor.apps.TutorConfig',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,6 +49,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+
+    'users.apps.UsersConfig',
+    'tutor.apps.TutorConfig',
 ]
 
 MIDDLEWARE = [
@@ -131,6 +134,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 #Google login
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
@@ -139,8 +145,10 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
 
-LOGIN_REDIRECT_URL = '/tutor/profile'
+LOGIN_REDIRECT_URL = '/users/register'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/tutor/login'
 
 # SOCIALACCOUNT_PROVIDERS = {
@@ -155,4 +163,5 @@ ACCOUNT_LOGOUT_REDIRECT_URL = '/tutor/login'
 #    }
 # }
 
-
+# Tells crispy_forms to use bootstrap4 by default
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
