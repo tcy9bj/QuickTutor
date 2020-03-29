@@ -1,6 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.views import generic
 
 from users.models import Profile
 
@@ -11,6 +9,3 @@ def home(request):
 
 def login(request):
     return render(request, 'tutor/login.html', {})
-
-def profile(request):
-    return render(request, 'tutor/profile.html', {})
