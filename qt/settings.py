@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-import django_heroku
+if 'HEROKU' in os.environ:
+    import django_heroku
+    # Activate Django-Heroku.
+    django_heroku.settings(locals(), test_runner=False)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,7 +29,7 @@ SECRET_KEY = '$firf(+7np&85ks9u3=k2%7jfpn)7f!n8dmd)y+*^&h-eoor-l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -162,6 +165,3 @@ ACCOUNT_LOGOUT_REDIRECT_URL = '/tutor/login'
 
 # Tells crispy_forms to use bootstrap4 by default
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-# Activate Django-Heroku.
-django_heroku.settings(locals())
