@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import RegexValidator
 from PIL import Image
 
 class Profile(models.Model):
@@ -9,6 +10,8 @@ class Profile(models.Model):
 	last_name = models.CharField(max_length=50)
 	major = models.CharField(max_length=75)
 	major2 = models.CharField(max_length=75, blank=True)
+	phone_regex = RegexValidator(regex=r'([0-9]{3}-){2}[0-9]{4}', message="Phone number must be entered in the format: 999-999-9999.")
+	phone_number = models.CharField(validators=[phone_regex], max_length=12, blank=False)
 	description = models.TextField(blank=True)
 	active = models.BooleanField(default=False)
 	initialized = models.BooleanField(default=False)
