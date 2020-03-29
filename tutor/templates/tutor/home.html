@@ -7,14 +7,17 @@
 			<h1><u>Active Tutors</u></h1>
 			{% if tutors %}
 				{% for tutor in tutors %}
-					{% if tutor.major2 %}
-						<div class="content-section">
-							<h3><a class="tutor-listing" href="{% url 'profile' %}">{{ tutor.first_name }} {{ tutor.last_name }} <small>Majors: {{tutor.major}}, {{tutor.major2}}</small></a></h3>
-						</div>
+					{% if tutor == user.profile %}
 					{% else %}
-						<div class="content-section">
-							<h3><a class="tutor-listing" href="{% url 'profile' %}">{{ tutor.first_name }} {{ tutor.last_name }} <small>Major: {{tutor.major}}</small></a></h3>
-						</div>
+						{% if tutor.major2 %}
+							<div class="content-section">
+								<h3><a class="tutor-listing" href="{% url 'profile_page' tutor.id %}">{{ tutor.first_name }} {{ tutor.last_name }} <small>Majors: {{tutor.major}}, {{tutor.major2}}</small></a></h3>
+							</div>
+						{% else %}
+							<div class="content-section">
+								<h3><a class="tutor-listing" href="{% url 'profile_page' tutor.id %}">{{ tutor.first_name }} {{ tutor.last_name }} <small>Major: {{tutor.major}}</small></a></h3>
+							</div>
+						{% endif %}
 					{% endif%}
 				{% endfor %}
 			{% else %}
