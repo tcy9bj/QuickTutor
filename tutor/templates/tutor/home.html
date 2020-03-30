@@ -27,7 +27,15 @@
 	</div>
     <div class="col-md-5">
     	<div class="content-section section-3">
-        	<h3>Profile</h3>
+        	<div>
+        		<h3 style="display: inline;">Current Tutor Status: </h3>
+        		{% if user.profile.active %}
+	        		<h3 style="display: inline; color: green;">Active</h3>
+	        	{% else %}
+	        		<h3 style="display: inline; color: red;">Inactive</h3>
+	        	{% endif %}
+        	</div>
+        	<br>
           	<p class='text-muted'>The profile of the tutor you are viewing will appear here.
             	<ul class="list-group">
             		<li class="list-group-item list-group-item-light">Their info</li>
