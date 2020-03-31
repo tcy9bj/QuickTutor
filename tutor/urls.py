@@ -10,4 +10,7 @@ urlpatterns = [
 
     #google login
     path('accounts/', include('allauth.urls')),
+
+    #request form
+    path('request/', views.request, name='request')
 ]
