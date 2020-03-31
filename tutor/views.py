@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 
 from users.models import Profile
 from tutor.forms import RequestForm
+from tutor.models import Ask
 
 def home(request):
 	tutors = Profile.objects.filter(active=True)
@@ -13,12 +14,12 @@ def login(request):
     return render(request, 'tutor/login.html', {})
 
 def request(request):
+	form = RequestForm()
 	if request.method == 'POST':
 		form = RequestForm(request.POST)
+		print(form.errors)
 		if form.is_valid():
+			print("hi")
 			form.save()
 			form = RequestForm()
-			return redirect('home', pk=post.pk)
-	else:
-		form = RequestForm()
-	return render(request, 'tutor/request.html', {})
+	return render(request, 'tutor/request.html')

@@ -7,13 +7,15 @@
 <link rel="stylesheet" type="text/css" href="{% static 'tutor/request.css' %}">
 
 <div class="container">
-  <form action= "{% url 'home' %}">
+  <form method='post'>
+
+    {% csrf_token %}
 
     <label for="fname">First Name</label>
-    <input type="text" id="fName" name="firstname" placeholder="Your first name..">
+    <input type="text" id="fName" name="fName" placeholder="Your first name..">
 
     <label for="lname">Last Name</label>
-    <input type="text" id="lName" name="lastname" placeholder="Your last name..">
+    <input type="text" id="lName" name="lName" placeholder="Your last name..">
 
     <label for="subject">Subject</label>
     <input type="text" name="subject" placeholder="Subject..">
