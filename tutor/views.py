@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+
 from users.models import Profile
+from tutor.forms import RequestForm
+from tutor.models import Ask
 
 tutor_locations = ['1515 Student Center','Alderman Library','Astronomy Building','Bryan Hall',
 				   'Chemistry Building','Clark Hall','Claude Moore Nursing School','Clemons Library',
@@ -46,3 +49,14 @@ def deactivate(request, profile_id):
 	context = {'tutors':tutors, 'locations':tutor_locations}
 	profile.save()
 	return redirect('home')
+
+def request(request):
+	if request.method == 'POST':
+		request_form = RequestForm(request.POST)
+		
+		if request_form.is_valid():
+			request_form.save()
+			return redirect('home')
+	else:
+		request_form = RequestForm()
+	return render(request, 'tutor/request.html', {'request_form':request_form})

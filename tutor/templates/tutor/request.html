@@ -1,0 +1,31 @@
+{% extends "tutor/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'tutor/request.css' %}">
+
+<div class="container">
+  <form method='post'>
+
+    {% csrf_token %}
+
+    <label for="fname">First Name</label>
+    <input type="text" id="fName" name="fName" placeholder="Your first name..">
+
+    <label for="lname">Last Name</label>
+    <input type="text" id="lName" name="lName" placeholder="Your last name..">
+
+    <label for="subject">Subject</label>
+    <input type="text" name="subject" placeholder="Subject..">
+
+    <label for="question">Question</label>
+    <textarea id="question" name="question" placeholder="What do you need help with?" style="height:200px"></textarea>
+
+    <input type="submit" value="Submit">
+
+  </form>
+</div>
+
+{% endblock content %}
