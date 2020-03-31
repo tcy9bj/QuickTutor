@@ -17,7 +17,7 @@ class Profile(models.Model):
 	initialized = models.BooleanField(default=False)
 
 	def __str__(self):
-		return (self.first_name + " " + self.last_name + " Profile")
+		return (self.first_name + " " + self.last_name + "'s Profile")
 
 	def save(self, *args, **kwargs):
 		super().save(*args, **kwargs)

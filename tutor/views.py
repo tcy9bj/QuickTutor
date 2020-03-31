@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect
 
 from users.models import Profile
 from tutor.forms import RequestForm
@@ -14,19 +13,12 @@ def login(request):
     return render(request, 'tutor/login.html', {})
 
 def request(request):
-	form = RequestForm()
 	if request.method == 'POST':
-		form = RequestForm(request.POST)
-		print(form.errors)
-		if form.is_valid():
-			print("hi")
-			form.save()
-			fName = form.cleaned_data['fName']
-			lName = form.cleaned_data['lName']
-			subject = form.cleaned_data['subject']
-			question = form.cleaned_data['question']
-			form.save()
-		else:
-			print("hey")
-			form = RequestForm()
-	return render(request, 'tutor/request.html')
+		request_form = RequestForm(request.POST)
+		
+		if request_form.is_valid():
+			request_form.save()
+			return redirect('home')
+	else:
+		request_form = RequestForm()
+	return render(request, 'tutor/request.html', {'request_form':request_form})
