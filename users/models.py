@@ -13,6 +13,7 @@ class Profile(models.Model):
 	phone_regex = RegexValidator(regex=r'([0-9]{3}-){2}[0-9]{4}', message="Phone number must be entered in the format: 999-999-9999.")
 	phone_number = models.CharField(validators=[phone_regex], max_length=12, blank=False)
 	description = models.TextField(blank=True)
+	location = models.CharField(max_length=50, blank=True, default='')
 	active = models.BooleanField(default=False)
 	initialized = models.BooleanField(default=False)
 

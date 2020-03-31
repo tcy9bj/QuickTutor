@@ -27,20 +27,46 @@
 	</div>
     <div class="col-md-5">
     	<div class="content-section section-3">
-        	<div>
-        		<h3 style="display: inline;">Current Tutor Status: </h3>
-        		{% if user.profile.active %}
+    		{% if user.profile.active %}
+        		<div>
+        			<h3 style="display: inline;">Current Tutor Status: </h3>
 	        		<h3 style="display: inline; color: green;">Active</h3>
-	        	{% else %}
+	        	</div>
+	        	<p>Current location: {{ user.profile.location }}</p>
+	        	<p class="text-muted">Done helping for now? Set yourself as inactive before you go.</p>
+	        	<div>
+	        		<form action="{% url 'deactivate' user.profile.id %}">
+	        			<button class="btn btn-outline-info" type="submit">Mark Inactive</button>
+	        		</form>
+	        	</div>
+	        {% else %}
+	        	<div>
+        			<h3 style="display: inline;">Current Tutor Status: </h3>
 	        		<h3 style="display: inline; color: red;">Inactive</h3>
-	        	{% endif %}
-        	</div>
-        	<br>
-          	<p class='text-muted'>The profile of the tutor you are viewing will appear here.
-            	<ul class="list-group">
-            		<li class="list-group-item list-group-item-light">Their info</li>
-            	</ul>
-          	</p>
+	        	</div>
+	        	<br>
+	          	<p class='text-muted'>Mark yourself as an active tutor to start assisting other students!
+	          	</p>
+	            <div>
+	            	<form action="{% url 'activate' user.profile.id %}" method="POST">
+	            		{% csrf_token %}
+	            		<fieldset class="form-group">
+	            			<label for="location_selector">Set location:</label>
+	            			<select multiple class="form-control" id="location_selector" name="location_selector">
+	            			{% for location in locations %}
+	            				<option value="{{ location }}">{{ location }}</option>
+	            			{% endfor %}
+	            		</select>
+	            		</fieldset>
+	            		{% if error_message %}
+	            			<p style="color: red">{{ error_message }}</p>
+	            		{% endif %}
+	            		<div class="form-group">
+	            			<button class="btn btn-outline-info" type="submit">Mark as Active</button>
+	            		</div>
+	            	</form>
+	            </div>
+            {% endif %}
         </div>
     </div>
 </div>
