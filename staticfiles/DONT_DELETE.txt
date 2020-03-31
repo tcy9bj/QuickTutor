@@ -1,0 +1,2 @@
+This file is here so the 'staticfiles' folder is present on GitHub and thus exists when the project
+is deployed to Heroku. Git does not support empty directories.
