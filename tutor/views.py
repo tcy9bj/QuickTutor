@@ -6,12 +6,12 @@ tutor_locations = ['1515 Student Center','Alderman Library','Astronomy Building'
 				   'Chemistry Building','Clark Hall','Claude Moore Nursing School','Clemons Library',
 				   'Cocke Hall','Curry School','Darden Library','Fine Arts Library','Garrett Hall',
 				   'Gilmer Hall','Halsey Hall','Health Sciences Library','Kerchof Hall','Law Library',
-				   'Maury Hall','McLeod Hall','Mechanical Engineering Building','Minor Hall','Monroe Hall',
-				   'Music Library','Nau-Gibson Hall','New Cabell Hall','Newcomb Hall',
-				   'Observatory Hill Dining Hall','Olsson Hall','Physics Building','Randall Hall',
-				   'Rice Hall','Rouss Robertson Hall','Runk Dining Hall','Special Collections Library',
-				   'The Castle','The Rotunda','Thornton Hall','West Range Cafe','Wilsdorf Hall',
-				   'Wilson Hall','Other (Central Grounds)', 'Other (E-School)','Other (Med School)',
+				   'Maury Hall','McLeod Hall','Mechanical Engineering Bldg','Minor Hall','Monroe Hall',
+				   'Music Library','Nau-Gibson Hall','New Cabell Hall','Newcomb Hall','O-Hill Dining Hall',
+				   'Olsson Hall','Physics Bldg','Randall Hall','Rice Hall','Rouss Robertson Hall',
+				   'Runk Dining Hall','Special Collections Library','The Castle','The Rotunda',
+				   'Thornton Hall','West Range Cafe','Wilsdorf Hall','Wilson Hall',
+				   'Other (Central Grounds)', 'Other (E-School)','Other (Med School)',
 				   'Other (North Grounds)','Other (The Corner)','Other']
 
 def login(request):
@@ -26,7 +26,7 @@ def home(request):
 @login_required
 def activate(request, profile_id):
 	selected_location = request.POST.get('location_selector')
-	if (selected_location == ''):
+	if (not selected_location):
 		tutors = Profile.objects.filter(active=True)
 		context = {'tutors':tutors, 'locations':tutor_locations, 'error_message':"Please select a location."}
 		return render(request, 'tutor/home.html', context)

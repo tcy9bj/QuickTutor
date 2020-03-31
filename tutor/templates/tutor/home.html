@@ -11,11 +11,13 @@
 					{% else %}
 						{% if tutor.major2 %}
 							<div class="content-section">
-								<h3><a class="tutor-listing" href="{% url 'profile_page' tutor.id %}">{{ tutor.first_name }} {{ tutor.last_name }} <small>Majors: {{tutor.major}}, {{tutor.major2}}</small></a></h3>
+								<h3><a class="tutor-listing" href="{% url 'profile_page' tutor.id %}">{{ tutor.first_name }} {{ tutor.last_name }}</a></h3>
+								<h5><small>Majors: {{tutor.major}}, {{tutor.major2}} | Location: {{ tutor.location }}</small></h5>
 							</div>
 						{% else %}
 							<div class="content-section">
-								<h3><a class="tutor-listing" href="{% url 'profile_page' tutor.id %}">{{ tutor.first_name }} {{ tutor.last_name }} <small>Major: {{tutor.major}}</small></a></h3>
+								<h3><a class="tutor-listing" href="{% url 'profile_page' tutor.id %}">{{ tutor.first_name }} {{ tutor.last_name }}</a></h3>
+								<h5><small>Major: {{tutor.major}} | Location: {{ tutor.location }}</small></h5>
 							</div>
 						{% endif %}
 					{% endif%}
