@@ -21,5 +21,12 @@ def request(request):
 		if form.is_valid():
 			print("hi")
 			form.save()
+			fName = form.cleaned_data['fName']
+			lName = form.cleaned_data['lName']
+			subject = form.cleaned_data['subject']
+			question = form.cleaned_data['question']
+			form.save()
+		else:
+			print("hey")
 			form = RequestForm()
 	return render(request, 'tutor/request.html')
