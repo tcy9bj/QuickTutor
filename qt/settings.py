@@ -103,11 +103,7 @@ DATABASES = {
         'NAME': 'qt',
         'USER': 'django',
         'PASSWORD': 'password',
-<<<<<<< HEAD
         'HOST': 'localhost',
-=======
-        'HOST': '',
->>>>>>> e4665bb096c268acfeb5808713f0fe07b077d485
         'PORT': '',
     }
 }
