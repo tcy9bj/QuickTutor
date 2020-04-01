@@ -1,20 +1,26 @@
 {% extends "tutor/base.html" %}
 
 {% block content %}
+
 <div class="row">
 	<div class="col-md-7">
 		<div class="section-3 box">
 			<h1><u>Active Tutors</u></h1>
 			{% if tutors %}
 				{% for tutor in tutors %}
-					{% if tutor.major2 %}
-						<div class="content-section">
-							<h3><a class="tutor-listing" href="{% url 'profile' %}">{{ tutor.first_name }} {{ tutor.last_name }} <small>Majors: {{tutor.major}}, {{tutor.major2}}</small></a></h3>
-						</div>
+					{% if tutor == user.profile %}
 					{% else %}
-						<div class="content-section">
-							<h3><a class="tutor-listing" href="{% url 'profile' %}">{{ tutor.first_name }} {{ tutor.last_name }} <small>Major: {{tutor.major}}</small></a></h3>
-						</div>
+						{% if tutor.major2 %}
+							<div class="content-section">
+								<h3><a class="tutor-listing" href="{% url 'profile_page' tutor.id %}">{{ tutor.first_name }} {{ tutor.last_name }}</a></h3>
+								<h5><small>Majors: {{tutor.major}}, {{tutor.major2}} | Location: {{ tutor.location }}</small></h5>
+							</div>
+						{% else %}
+							<div class="content-section">
+								<h3><a class="tutor-listing" href="{% url 'profile_page' tutor.id %}">{{ tutor.first_name }} {{ tutor.last_name }}</a></h3>
+								<h5><small>Major: {{tutor.major}} | Location: {{ tutor.location }}</small></h5>
+							</div>
+						{% endif %}
 					{% endif%}
 				{% endfor %}
 			{% else %}
@@ -24,12 +30,46 @@
 	</div>
     <div class="col-md-5">
     	<div class="content-section section-3">
-        	<h3>Profile</h3>
-          	<p class='text-muted'>The profile of the tutor you are viewing will appear here.
-            	<ul class="list-group">
-            		<li class="list-group-item list-group-item-light">Their info</li>
-            	</ul>
-          	</p>
+    		{% if user.profile.active %}
+        		<div>
+        			<h3 style="display: inline;">Current Tutor Status: </h3>
+	        		<h3 style="display: inline; color: green;">Active</h3>
+	        	</div>
+	        	<p>Current location: {{ user.profile.location }}</p>
+	        	<p class="text-muted">Done helping for now? Set yourself as inactive before you go.</p>
+	        	<div>
+	        		<form action="{% url 'deactivate' user.profile.id %}">
+	        			<button class="btn btn-outline-info" type="submit">Mark Inactive</button>
+	        		</form>
+	        	</div>
+	        {% else %}
+	        	<div>
+        			<h3 style="display: inline;">Current Tutor Status: </h3>
+	        		<h3 style="display: inline; color: red;">Inactive</h3>
+	        	</div>
+	        	<br>
+	          	<p class='text-muted'>Mark yourself as an active tutor to start assisting other students!
+	          	</p>
+	            <div>
+	            	<form action="{% url 'activate' user.profile.id %}" method="POST">
+	            		{% csrf_token %}
+	            		<fieldset class="form-group">
+	            			<label for="location_selector">Set location:</label>
+	            			<select multiple class="form-control" id="location_selector" name="location_selector">
+	            			{% for location in locations %}
+	            				<option value="{{ location }}">{{ location }}</option>
+	            			{% endfor %}
+	            		</select>
+	            		</fieldset>
+	            		{% if error_message %}
+	            			<p style="color: red">{{ error_message }}</p>
+	            		{% endif %}
+	            		<div class="form-group">
+	            			<button class="btn btn-outline-info" type="submit">Mark as Active</button>
+	            		</div>
+	            	</form>
+	            </div>
+            {% endif %}
         </div>
     </div>
 </div>

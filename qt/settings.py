@@ -35,7 +35,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'tutor.apps.TutorConfig',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,6 +49,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+
+    'users.apps.UsersConfig',
+    'tutor.apps.TutorConfig',
 ]
 
 MIDDLEWARE = [
@@ -59,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'qt.urls'
@@ -144,8 +148,18 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 
 #Google login
 AUTHENTICATION_BACKENDS = (
@@ -155,8 +169,11 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
 
-LOGIN_REDIRECT_URL = '/tutor/profile'
+LOGIN_REDIRECT_URL = '/users/register'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/tutor/login'
 
 # SOCIALACCOUNT_PROVIDERS = {
 #     'google': {
@@ -170,4 +187,5 @@ LOGIN_REDIRECT_URL = '/tutor/profile'
 #    }
 # }
 
-
+# Tells crispy_forms to use bootstrap4 by default
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

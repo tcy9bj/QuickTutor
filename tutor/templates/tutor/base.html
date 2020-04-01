@@ -19,7 +19,7 @@
 
 <body>
   <!-- Header Picture -->
-  <div class="section-1 box"></div>
+  <header class="section-1 box"></header>
 
   <!-- Navbar -->
   <div class="section-2 box">
@@ -27,7 +27,7 @@
       <nav class="navbar navbar-expand-md navbar-dark bg-blue fixed-top">
         <div class="container">
           <a class="navbar-brand mr-4" href="{% url 'home' %}">
-            <img class="resize" src="../../static/tutor/images/quickTutorlogowhite.png" alt="Logo">
+            <img class="resize" src="../../../static/tutor/images/quickTutorlogowhite.png" alt="Logo">
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -35,11 +35,11 @@
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
               <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
-              <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+              <a class="nav-item nav-link" href="{% url 'profile_page' user.profile.id %}">Profile</a>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
-              <a id="logout" href="{% url 'login' %}" style="color: white;">Logout</a>
+              <a id="logout" href="{% url 'account_logout' %}" style="color: white;">Logout</a>
             </div>
           </div>
         </div>
@@ -48,6 +48,17 @@
   </div>
 
   <main role="main" class="container">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+    
     {% block content %}
     {% endblock %}
   </main>
