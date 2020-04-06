@@ -50,6 +50,7 @@ def deactivate(request, profile_id):
 	profile.save()
 	return redirect('home')
 
+
 def request(request):
 	if request.method == 'POST':
 		request_form = RequestForm(request.POST)
