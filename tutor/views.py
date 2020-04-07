@@ -53,11 +53,11 @@ def deactivate(request, profile_id):
 
 def request(request):
 	if request.method == 'POST':
-		request_form = RequestForm(request.POST)
+		form = RequestForm(request.POST)
 		
-		if request_form.is_valid():
-			request_form.save()
+		if form.is_valid():
+			form.save()
 			return redirect('home')
 	else:
-		request_form = RequestForm()
-	return render(request, 'tutor/request.html', {'request_form':request_form})
+		form = RequestForm()
+	return render(request, 'tutor/request.html', {'form':form})

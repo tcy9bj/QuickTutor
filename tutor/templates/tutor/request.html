@@ -1,31 +1,18 @@
 {% extends "tutor/base.html" %}
-
+{% load crispy_forms_tags %}
 {% load static %}
 
 {% block content %}
-
-<link rel="stylesheet" type="text/css" href="{% static 'tutor/request.css' %}">
-
-<div class="container">
-  <form method='post'>
-
-    {% csrf_token %}
-
-    <label for="fname">First Name</label>
-    <input type="text" id="fName" name="fName" placeholder="Your first name..">
-
-    <label for="lname">Last Name</label>
-    <input type="text" id="lName" name="lName" placeholder="Your last name..">
-
-    <label for="subject">Subject</label>
-    <input type="text" name="subject" placeholder="Subject..">
-
-    <label for="question">Question</label>
-    <textarea id="question" name="question" placeholder="What do you need help with?" style="height:200px"></textarea>
-
-    <input type="submit" value="Submit">
-
-  </form>
-</div>
-
+    <div class="container">
+      <form method='post'>
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Submit a question to receive assistance</legend>
+            {{ form|crispy }}
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Submit Question</button>
+            </div>
+        </fieldset>
+      </form>
+    </div>
 {% endblock content %}
