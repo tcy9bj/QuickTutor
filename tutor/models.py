@@ -9,4 +9,4 @@ class Ask(models.Model):
     accepted = models.BooleanField(default=False)
 
     def __str__(self):
-    	return (self.course)
+    	return (self.sender.profile.first_name + " " + self.sender.profile.last_name + " - " + self.course)

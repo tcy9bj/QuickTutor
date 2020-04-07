@@ -11,7 +11,6 @@ from django.shortcuts import redirect
 def create_profile(sender, instance, created, **kwargs):
 	if created:
 		Profile.objects.create(user=instance)
-		#return redirect('register')
 
 
 @receiver(post_save, sender=User)
