@@ -14,5 +14,5 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
 
     #request form
-    path('request/', views.request, name='request')
+    path('request/<int:tutor_id>/', views.request, name='request')
 ]

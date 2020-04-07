@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 from users.models import Profile
 from tutor.forms import RequestForm
@@ -50,14 +51,19 @@ def deactivate(request, profile_id):
 	profile.save()
 	return redirect('home')
 
-
-def request(request):
+@login_required
+def request(request, tutor_id):
 	if request.method == 'POST':
 		form = RequestForm(request.POST)
 		
 		if form.is_valid():
-			form.save()
+			ask = form.save(commit=False)
+			sender = request.user
+			receiver = get_object_or_404(User, pk=tutor_id)
+			ask.sender = sender
+			ask.receiver = receiver
+			ask.save()
 			return redirect('home')
 	else:
 		form = RequestForm()
-	return render(request, 'tutor/request.html', {'form':form})
+	return render(request, 'tutor/request.html', {'form':form, 'requested_tutor_id':tutor_id})

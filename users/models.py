@@ -15,8 +15,6 @@ class Profile(models.Model):
 	phone_number = models.CharField(validators=[phone_regex], max_length=12, blank=False)
 	description = models.TextField(blank=True)
 	location = models.CharField(max_length=50, blank=True, default='')
-	pending_ask_rcv = []
-	pending_ask_snt = []
 	current_client = models.OneToOneField(Ask, on_delete=models.SET_NULL, null=True)
 	active = models.BooleanField(default=False)
 	initialized = models.BooleanField(default=False)
