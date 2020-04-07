@@ -1,0 +1,19 @@
+{% extends "tutor/base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Delete Request</legend>
+                <h2 class="mb-3">Are you sure you want to delete this request for help with {{ object.course }}?</h2>
+                <h6>Deleting this request will prevent the tutor from being able to contact you.</h6>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
+                <a class="btn btn-outline-secondary" href="{% url 'ask-detail' object.id %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

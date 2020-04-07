@@ -1,0 +1,33 @@
+{% extends "tutor/base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="row">
+        <div class="section-3 box">
+            <h1><u>Received Tutor Requests:</u></h1>
+            {% if incoming_requests %}
+                {% for request in incoming_requests %}
+                    <div class="content-section">
+                        <h3><a class="tutor-listing" href="{% url 'ask-detail' request.id %}">{{ request }}</a></h3>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No requests received</p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="section-3 box">
+            <h1><u>Sent Tutor Requests:</u></h1>
+            {% if outgoing_requests %}
+                {% for request in outgoing_requests %}
+                    <div class="content-section">
+                        <h3><a class="tutor-listing" href="{% url 'ask-detail' request.id %}">{{ request }}</a></h3>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No requests sent</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

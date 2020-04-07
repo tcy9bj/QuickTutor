@@ -1,0 +1,17 @@
+{% extends "tutor/base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="content-section">
+        <div class="section-3 box">
+        	{% if user == object.sender %}
+        		<h2>Request Tutor: {{ object.receiver.profile.first_name }} {{ object.receiver.profile.last_name }}</h2>
+        	{% else %}
+            	<h2>Request From: {{ object.sender.profile.first_name }} {{ object.sender.profile.last_name }}</h2>
+            {% endif %}
+            <h4>Related course: {{ object.course }}</h4>
+            <h4>Question:</h4>
+            <p>{{ object.question }}</p>
+        </div>
+    </div>
+{% endblock content %}
