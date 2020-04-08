@@ -44,7 +44,7 @@ def inbox(request):
 		'incoming_requests':incoming_requests,
 		'outgoing_requests':outgoing_requests
 	}
-	return render(request, 'users/inbox.html', context)
+	return render(request, 'users/inbox2.html', context)
 
 class AskDetailView(LoginRequiredMixin, DetailView):
 	model = Ask

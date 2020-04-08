@@ -1,4 +1,5 @@
 {% extends "tutor/base.html" %}
+{% load static %}
 
 {% block content %}
 
@@ -12,24 +13,41 @@
 			</div>
 			<!--List-->
 			<div>
-				<!--Temporary fake request, for design purposes-->
-				<div class="col request-listing">
-					<!--Requester Info-->
-					<div style="display: block; text-align: center;">
-						<h5>Some Guy - CS 3240</h5>
-					</div>
-					<!--Their question-->
-					<div style="display: block; text-align: center;">
-						<p>I can't connect to heroku. help plz</p>
-					</div>
-				</div>
-				<!--
-				{% if Requests %}
-
+				{% if outgoing_requests %}
+                {% for request in outgoing_requests %}
+                    {% if request.accepted %}
+                        <div class="col request-listing">
+							<!--Requester Info-->
+							<div style="display: block; text-align: center;">
+								<h5>{{ request }}</h5>
+								<p>Request Status: <b>Accepted</b></p>
+								<a class="btn btn-secondary" href="{% url 'ask-detail' request.id %}" role="button">View Details</a>
+							</div>
+                        </div>
+                    {% elif request.declined %}
+                        <div class="col request-listing">
+							<!--Requester Info-->
+							<div style="display: block; text-align: center;">
+								<h5>{{ request }}</h5>
+								<p>Request Status: <b>Declined</b></p>
+								<a class="btn btn-secondary" href="{% url 'ask-detail' request.id %}" role="button">View Details</a>
+							</div>
+                        </div>
+                    {% else %}
+                        <div class="col request-listing">
+							<!--Requester Info-->
+							<div style="display: block; text-align: center;">
+								<h5>{{ request.receiver.profile.first_name }} {{ request.receiver.profile.last_name }} {{ request}}</h5>
+								<p>Request Status: <b>Pending</b></p>
+								<a class="btn btn-secondary" href="{% url 'ask-detail' request.id %}" role="button">View Details</a>
+							</div>
+                        </div>
+					{% endif %}
+					<br> <!--Add some spacing-->
+                {% endfor %}
 				{% else %}
-				<p>You currently have no outgoing help requests</p>
+					<p>No requests sent</p>
 				{% endif %}
-				-->
 			</div>
     	</div>
 	</div>
@@ -43,30 +61,33 @@
 			</div>
 			<!--List-->
 			<div>
-				<!--Temporary fake request, for design purposes-->
+				{% if incoming_requests %}
+                {% for request in incoming_requests %}
+                    <div class="col request-listing">
+                        <h3><a class="tutor-listing" href="{% url 'ask-detail' request.id %}">From: {{ request }}</a></h3>
+                    </div>
+                {% endfor %}
+				{% else %}
+					<h6>No requests received</h6>
+				{% endif %}
+
+				<!--
 				<div class="col request-listing">
-					<!--Requester Info-->
 					<div style="display: block; text-align: center;">
 						<h5>Matt Hoffman  - CS 2150</h5>
 					</div>
-					<!--Their question-->
+			
 					<div style="display: block; text-align: center;">
 						<p>I need help with trees and rotations</p>
 					</div>
-					<!--Accept/Deny Buttons-->
+					
 					<div style="display: block; text-align: center;">
 						<button type="button" class="btn btn-success">Accept</button>
 						<button type="button" class="btn btn-danger">Deny</button>
 					</div>
 				</div>
+			-->
 
-				<!--
-				{% if Requests %}
-
-				{% else %}
-				<p>You currently have no incoming help requests</p>
-				{% endif %}
-				-->
 			</div>
     	</div>
 	</div>
