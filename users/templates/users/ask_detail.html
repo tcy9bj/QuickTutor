@@ -20,16 +20,16 @@
                     <h6>The tutor you requested has accepted your request! They will contact you shortly.</h6>
                 {% elif object.declined %}
                     <h6>The tutor you requested has declined your question because they are busy or unable to answer it. You can delete this request with no consequences.</h6>
-                    <a class="btn btn-danger" href="{% url 'ask-delete' object.id %}">Delete Request</a>
+                    <a class="btn btn-outline-danger" href="{% url 'ask-delete' object.id %}">Delete Request</a>
                 {% else %}
-                    <a class="btn btn-danger" href="{% url 'ask-delete' object.id %}">Cancel Request</a>
+                    <a class="btn btn-outline-danger" href="{% url 'ask-delete' object.id %}">Cancel Request</a>
                 {% endif %}
             {% elif object.receiver == user %}
                 {% if object.accepted %}
-                    <a class="btn btn-info d-inline mt-3" href="{% url 'ask-complete' object.id %}">Tutoring Completed</a>
+                    <a class="btn btn-outline-info d-inline mt-3" href="{% url 'ask-complete' object.id %}">Tutoring Completed</a>
                 {% else %}
-                    <a class="btn btn-success mt-3" href="{% url 'ask-accept' object.id %}">Accept</a>
-                    <a class="btn btn-danger mt-3" href="{% url 'ask-decline' object.id %}">Decline</a>
+                    <a class="btn btn-outline-success mt-3" href="{% url 'ask-accept' object.id %}">Accept</a>
+                    <a class="btn btn-outline-danger mt-3" href="{% url 'ask-decline' object.id %}">Decline</a>
                 {% endif %}
             {% endif %}
         </div>

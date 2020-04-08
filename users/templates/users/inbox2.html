@@ -14,37 +14,37 @@
 			<!--List-->
 			<div>
 				{% if outgoing_requests %}
-                {% for request in outgoing_requests %}
-                    {% if request.accepted %}
-                        <div class="col request-listing">
-							<!--Requester Info-->
-							<div style="display: block; text-align: center;">
-								<h5>{{ request }}</h5>
-								<p>Request Status: <b>Accepted</b></p>
-								<a class="btn btn-secondary" href="{% url 'ask-detail' request.id %}" role="button">View Details</a>
-							</div>
-                        </div>
-                    {% elif request.declined %}
-                        <div class="col request-listing">
-							<!--Requester Info-->
-							<div style="display: block; text-align: center;">
-								<h5>{{ request }}</h5>
-								<p>Request Status: <b>Declined</b></p>
-								<a class="btn btn-secondary" href="{% url 'ask-detail' request.id %}" role="button">View Details</a>
-							</div>
-                        </div>
-                    {% else %}
-                        <div class="col request-listing">
-							<!--Requester Info-->
-							<div style="display: block; text-align: center;">
-								<h5>{{ request.receiver.profile.first_name }} {{ request.receiver.profile.last_name }} {{ request}}</h5>
-								<p>Request Status: <b>Pending</b></p>
-								<a class="btn btn-secondary" href="{% url 'ask-detail' request.id %}" role="button">View Details</a>
-							</div>
-                        </div>
-					{% endif %}
-					<br> <!--Add some spacing-->
-                {% endfor %}
+	                {% for request in outgoing_requests %}
+	                    {% if request.accepted %}
+	                        <div class="col request-listing border-bottom">
+								<!--Requester Info-->
+								<div style="display: block; text-align: center;">
+									<h5>Sent to: {{ request.receiver.profile.first_name }} {{ request.receiver.profile.last_name }} - Course: {{ request.course }}</h5>
+									<p>Request Status: <b class="text-success">Accepted</b></p>
+									<a class="btn btn-outline-info mb-3" href="{% url 'ask-detail' request.id %}" role="button">View Details</a>
+								</div>
+	                        </div>
+	                    {% elif request.declined %}
+	                        <div class="col request-listing border-bottom">
+								<!--Requester Info-->
+								<div style="display: block; text-align: center;">
+									<h5>Sent to: {{ request.receiver.profile.first_name }} {{ request.receiver.profile.last_name }} - Course: {{ request.course }}</h5>
+									<p>Request Status: <b class="text-danger">Declined</b></p>
+									<a class="btn btn-outline-info mb-3" href="{% url 'ask-detail' request.id %}" role="button">View Details</a>
+								</div>
+	                        </div>
+	                    {% else %}
+	                        <div class="col request-listing border-bottom">
+								<!--Requester Info-->
+								<div style="display: block; text-align: center;">
+									<h5>Sent to: {{ request.receiver.profile.first_name }} {{ request.receiver.profile.last_name }} - Course: {{ request.course }}</h5>
+									<p>Request Status: <b class="text-secondary">Pending</b></p>
+									<a class="btn btn-outline-info mb-3" href="{% url 'ask-detail' request.id %}" role="button">View Details</a>
+								</div>
+	                        </div>
+						{% endif %}
+						<br> <!--Add some spacing-->
+	                {% endfor %}
 				{% else %}
 					<p>No requests sent</p>
 				{% endif %}
@@ -62,17 +62,17 @@
 			<!--List-->
 			<div>
 				{% if incoming_requests %}
-                {% for request in incoming_requests %}
-                    <div class="col request-listing">
-						<div style="display: block; text-align: center;">
-							<h5>{{ request.receiver.profile.first_name }} {{ request.receiver.profile.last_name }} {{ request}}</h5>
-							<a class="btn btn-secondary" href="{% url 'ask-detail' request.id %}" role="button">View Details</a>
-						</div>
-                    </div>
-				{% endfor %}
-				<br>
+	                {% for request in incoming_requests %}
+	                    <div class="col request-listing border-bottom">
+							<div style="display: block; text-align: center;">
+								<h5>Request from: {{ request.sender.profile.first_name }} {{ request.sender.profile.last_name }} - Course: {{ request.course }}</h5>
+								<a class="btn btn-outline-info mb-3" href="{% url 'ask-detail' request.id %}" role="button">View Details</a>
+							</div>
+	                    </div>
+					{% endfor %}
+					<br>
 				{% else %}
-					<h6>No requests received</h6>
+					<p>No requests received</p>
 				{% endif %}
 
 				<!--
@@ -95,7 +95,20 @@
 			</div>
     	</div>
 	</div>
-
 </div>
-
+<div class="row">
+    <div class="content-section section-3 box mb-3">
+        <div>
+			<h3 style="display: inline;">Current Client</h3>
+			<hr>
+		</div>
+        {% if user.profile.current_client %}
+            <div class="content-section">
+                <h3><a class="tutor-listing" href="{% url 'ask-detail' user.profile.current_client.id %}">{{ user.profile.current_client }}</a></h3>
+            </div>
+        {% else %}
+            <h6>No current client. Once you accept a request you'll be able to access their contact info here!</h6>
+        {% endif %}
+    </div>
+</div>
 {% endblock content %}
