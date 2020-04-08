@@ -108,3 +108,11 @@ a.tutor-listing:hover {
   max-width:75px;
   max-height:40px;
 }
+
+.request-listing {
+  background: #ececec;
+  padding: 10px 20px;
+  border: 2px solid #b8b8b8d7;
+  border-radius: 3px;
+  margin-right: 10px;
+}
