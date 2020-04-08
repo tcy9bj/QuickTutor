@@ -64,9 +64,13 @@
 				{% if incoming_requests %}
                 {% for request in incoming_requests %}
                     <div class="col request-listing">
-                        <h3><a class="tutor-listing" href="{% url 'ask-detail' request.id %}">From: {{ request }}</a></h3>
+						<div style="display: block; text-align: center;">
+							<h5>{{ request.receiver.profile.first_name }} {{ request.receiver.profile.last_name }} {{ request}}</h5>
+							<a class="btn btn-secondary" href="{% url 'ask-detail' request.id %}" role="button">View Details</a>
+						</div>
                     </div>
-                {% endfor %}
+				{% endfor %}
+				<br>
 				{% else %}
 					<h6>No requests received</h6>
 				{% endif %}
