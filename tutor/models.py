@@ -7,6 +7,7 @@ class Ask(models.Model):
     course = models.CharField(max_length=100)
     question = models.TextField()
     accepted = models.BooleanField(default=False)
+    declined = models.BooleanField(default=False)
 
     def __str__(self):
     	return (self.sender.profile.first_name + " " + self.sender.profile.last_name + " - " + self.course)

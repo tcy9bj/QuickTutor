@@ -5,7 +5,7 @@ from .models import Profile
 from django.contrib.auth.models import User
 
 class ProfileUpdateForm(forms.ModelForm):
-	major2 = forms.CharField(label="2nd Major")
+	major2 = forms.CharField(label="2nd Major", required=False)
 	phone_number = forms.RegexField(regex=r'([0-9]{3}-){2}[0-9]{4}', 
 									help_text="Phone number must be entered in the format: 123-456-7890")
 

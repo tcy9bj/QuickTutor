@@ -2,13 +2,15 @@
 {% load static %}
 
 {% block content %}
-    <div class="content-section">
+    <div class="content-section mt-3">
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Delete Request</legend>
                 <h2 class="mb-3">Are you sure you want to delete this request for help with {{ object.course }}?</h2>
-                <h6>Deleting this request will prevent the tutor from being able to contact you.</h6>
+                {% if not object.declined %}
+                    <h6>Deleting this request will prevent the tutor from being able to contact you.</h6>
+                {% endif %}
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>

@@ -4,15 +4,27 @@
 {% block content %}
     <div class="row">
         <div class="section-3 box">
+            <h1><u>Current Client:</u></h1>
+            {% if user.profile.current_client %}
+                <div class="content-section">
+                    <h3><a class="tutor-listing" href="{% url 'ask-detail' user.profile.current_client.id %}">{{ user.profile.current_client }}</a></h3>
+                </div>
+            {% else %}
+                <h6>No current client. Once you accept a request you'll be able to access their contact info here!</h6>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="section-3 box">
             <h1><u>Received Tutor Requests:</u></h1>
             {% if incoming_requests %}
                 {% for request in incoming_requests %}
                     <div class="content-section">
-                        <h3><a class="tutor-listing" href="{% url 'ask-detail' request.id %}">{{ request }}</a></h3>
+                        <h3><a class="tutor-listing" href="{% url 'ask-detail' request.id %}">From: {{ request }}</a></h3>
                     </div>
                 {% endfor %}
             {% else %}
-                <p>No requests received</p>
+                <h6>No requests received</h6>
             {% endif %}
         </div>
     </div>
@@ -21,9 +33,19 @@
             <h1><u>Sent Tutor Requests:</u></h1>
             {% if outgoing_requests %}
                 {% for request in outgoing_requests %}
-                    <div class="content-section">
-                        <h3><a class="tutor-listing" href="{% url 'ask-detail' request.id %}">{{ request }}</a></h3>
-                    </div>
+                    {% if request.accepted %}
+                        <div class="content-section">
+                            <h3><a class="tutor-listing" href="{% url 'ask-detail' request.id %}">To: {{ request }}; Request Status: Accepted</a></h3>
+                        </div>
+                    {% elif request.declined %}
+                        <div class="content-section">
+                            <h3><a class="tutor-listing" href="{% url 'ask-detail' request.id %}">To: {{ request }}; Request Status: Declined</a></h3>
+                        </div>
+                    {% else %}
+                        <div class="content-section">
+                            <h3><a class="tutor-listing" href="{% url 'ask-detail' request.id %}">To: {{ request }}; Request Status: Pending</a></h3>
+                        </div>
+                    {% endif %}
                 {% endfor %}
             {% else %}
                 <p>No requests sent</p>
