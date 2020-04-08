@@ -1,0 +1,18 @@
+{% extends "tutor/base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="content-section mt-3">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Confirm Tutoring Completed</legend>
+                <p class="mb-3">By clicking the button below, you are confirming that you have completed or otherwise ended your tutoring session with {{ object.sender.profile.first_name }} {{ object.sender.profile.last_name }}. Completing this request will remove the user as your current client and you will no longer be able to see their contact information.</p>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Tutoring Complete</button>
+                <a class="btn btn-outline-secondary" href="{% url 'ask-detail' object.id %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

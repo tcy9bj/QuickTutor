@@ -36,6 +36,7 @@
             <div class="navbar-nav mr-auto">
               <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
               <a class="nav-item nav-link" href="{% url 'profile_page' user.profile.id %}">Profile</a>
+              <a class="nav-item nav-link" href="{% url 'inbox' %}">Requests</a>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
@@ -50,10 +51,7 @@
   <main role="main" class="container">
     {% if messages %}
       {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{%endif%} alert-dismissible" role="alert">
           {{ message }}
         </div>
       {% endfor %}
