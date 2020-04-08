@@ -162,7 +162,8 @@
 
         <!-- Contact user -->
         <p>
-          <a href="{% url 'request' %}" class="profile__contact-btn btn btn-lg btn-block btn-info" data-toggle="modal" data-target="#profile__contact-form">
+          <!-- Note: unlike other places on this page, the request url takes a User id not a Profile id -->
+          <a href="{% url 'request' profile.user.id %}" class="profile__contact-btn btn btn-lg btn-block btn-info" data-toggle="modal" data-target="#profile__contact-form">
             Request Help
           </a>
         </p>
