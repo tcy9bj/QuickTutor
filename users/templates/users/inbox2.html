@@ -1,0 +1,76 @@
+{% extends "tutor/base.html" %}
+
+{% block content %}
+
+<div class="row">
+	<!--Show Active Outgoing Tutor Requests-->
+	<div class="col-md-6">
+    	<div class="content-section section-3">
+			<div>
+				<h3 style="display: inline;">Outgoing Tutor Requests</h3>
+				<hr>
+			</div>
+			<!--List-->
+			<div>
+				<!--Temporary fake request, for design purposes-->
+				<div class="col request-listing">
+					<!--Requester Info-->
+					<div style="display: block; text-align: center;">
+						<h5>Some Guy - CS 3240</h5>
+					</div>
+					<!--Their question-->
+					<div style="display: block; text-align: center;">
+						<p>I can't connect to heroku. help plz</p>
+					</div>
+				</div>
+				<!--
+				{% if Requests %}
+
+				{% else %}
+				<p>You currently have no outgoing help requests</p>
+				{% endif %}
+				-->
+			</div>
+    	</div>
+	</div>
+
+	<!--Show Active Incoming Tutor Requests-->
+	<div class="col-md-6">
+    	<div class="content-section section-3">
+			<div>
+				<h3 style="display: inline;">Incoming Tutor Requests</h3>
+				<hr>
+			</div>
+			<!--List-->
+			<div>
+				<!--Temporary fake request, for design purposes-->
+				<div class="col request-listing">
+					<!--Requester Info-->
+					<div style="display: block; text-align: center;">
+						<h5>Matt Hoffman  - CS 2150</h5>
+					</div>
+					<!--Their question-->
+					<div style="display: block; text-align: center;">
+						<p>I need help with trees and rotations</p>
+					</div>
+					<!--Accept/Deny Buttons-->
+					<div style="display: block; text-align: center;">
+						<button type="button" class="btn btn-success">Accept</button>
+						<button type="button" class="btn btn-danger">Deny</button>
+					</div>
+				</div>
+
+				<!--
+				{% if Requests %}
+
+				{% else %}
+				<p>You currently have no incoming help requests</p>
+				{% endif %}
+				-->
+			</div>
+    	</div>
+	</div>
+
+</div>
+
+{% endblock content %}
