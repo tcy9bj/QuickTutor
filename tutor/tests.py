@@ -19,6 +19,20 @@ class ViewsTest(TestCase):
 		response = self.client.get('/tutor/home/')
 		self.assertEqual(response.status_code, 302)
 
+	def test_inbox_view(self):
+		response = self.client.get('/users/inbox/')
+		self.assertEqual(response.status_code, 302)
+
 	def test_request_valid(self):
 		user_request = RequestForm(data={'sender':self.user1, 'receiver':self.user2, 'course': 'CS1110', 'question': 'help me'})
 		self.assertTrue(user_request.is_valid())
+
+class RequestsView(TestCase):
+
+	def test_requestValid(self):
+		request = RequestForm(data={'course': "CS 3240", 'question': "help me"})
+		self.assertTrue(request.is_valid())
+
+	def test_requestInvalid(self):
+		request = RequestForm(data={'course': "CS 3240", 'question': ""})
+		self.assertFalse(request.is_valid())
