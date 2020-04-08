@@ -2,8 +2,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.generic import DetailView, DeleteView
 from django.contrib import messages
-from .models import Profile
+from django.urls import reverse
+from users.models import Profile
+from tutor.models import Ask
 
 @login_required
 def register(request):
@@ -31,3 +35,70 @@ def register(request):
 def profile_page(request, profile_id):
 	profile = get_object_or_404(Profile, pk=profile_id)
 	return render(request, 'users/profile.html', {'profile':profile})
+
+@login_required
+def inbox(request):
+	incoming_requests = request.user.receiving_user.filter(accepted=False, declined=False)
+	outgoing_requests = request.user.sending_user.all()
+	context = {
+		'incoming_requests':incoming_requests,
+		'outgoing_requests':outgoing_requests
+	}
+	return render(request, 'users/inbox.html', context)
+
+class AskDetailView(LoginRequiredMixin, DetailView):
+	model = Ask
+	template_name = 'users/ask_detail.html'
+
+class AskDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+	model = Ask
+	template_name = 'users/ask_confirm_delete.html'
+
+	def get_success_url(self):
+		return reverse('inbox')
+
+	def test_func(self):
+		ask = self.get_object()
+		if (self.request.user == ask.sender):
+			return True
+		else:
+			return False
+
+class AskCompleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+	model = Ask
+	template_name = 'users/ask_confirm_completion.html'
+
+	def get_success_url(self):
+		return reverse('inbox')
+
+	def test_func(self):
+		ask = self.get_object()
+		print(self.request.user)
+		print(ask.receiver)
+		print(self.request.user.profile.current_client)
+		print(ask.sender)
+		if (self.request.user == ask.receiver and self.request.user.profile.current_client == ask):
+			return True
+		else:
+			return False
+
+@login_required
+def accept_ask(request, ask_id):
+	ask = get_object_or_404(Ask, pk=ask_id)
+	profile = request.user.profile
+	if (profile.current_client):
+		messages.error(request, 'You may not accept a new request when you already have an active one. Please complete the request of your current client.')
+		return redirect('inbox')
+	ask.accepted = True
+	profile.current_client = ask
+	ask.save()
+	profile.save()
+	return redirect('inbox')
+
+@login_required
+def decline_ask(request, ask_id):
+	ask = get_object_or_404(Ask, pk=ask_id)
+	ask.declined = True
+	ask.save()
+	messages.info(request, f'The request has been declined.')
+	return redirect('inbox')
