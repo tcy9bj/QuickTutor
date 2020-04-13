@@ -15,7 +15,9 @@ class Profile(models.Model):
 	phone_number = models.CharField(validators=[phone_regex], max_length=12, blank=False)
 	description = models.TextField(blank=True)
 	location = models.CharField(max_length=50, blank=True, default='')
-	current_client = models.OneToOneField(Ask, on_delete=models.SET_NULL, null=True)
+	current_client = models.OneToOneField(Ask, on_delete=models.SET_NULL, null=True, blank=True)
+	tutor_score = models.FloatField(null=True, blank=True)
+	num_ratings = models.IntegerField(blank=True, default=0)
 	active = models.BooleanField(default=False)
 	initialized = models.BooleanField(default=False)
 

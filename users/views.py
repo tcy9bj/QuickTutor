@@ -102,3 +102,20 @@ def decline_ask(request, ask_id):
 	ask.save()
 	messages.info(request, f'The request has been declined.')
 	return redirect('inbox')
+
+@login_required
+def review(request, profile_id):
+	profile = get_object_or_404(Profile, pk=profile_id)
+	if request.method == 'POST':
+		rating = float(request.POST.get('rating'))
+		if (profile.tutor_score == None):
+			profile.tutor_score = rating
+			profile.num_ratings += 1
+		else:
+			profile.num_ratings += 1
+			new_tutor_score = profile.tutor_score + ((rating - profile.tutor_score) / profile.num_ratings)
+			profile.tutor_score = round(new_tutor_score, 2)
+		profile.save()
+		return redirect('profile_page', profile_id=profile.id)
+
+	return render(request, 'users/review.html', {'profile':profile})

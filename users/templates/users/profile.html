@@ -92,68 +92,40 @@
           </div>
         </div>
 
-        <!-- Latest posts -->
+        <!-- Tutor Ratings -->
         <div class="panel panel-default">
           <div class="panel-heading">
-          <h4 class="panel-title">Latest Reviews</h4>
+            <h4 class="panel-title">Ratings</h4>
           </div>
           <div class="panel-body">
-            <div class="profile__comments">
-              <div class="profile-comments__item">
-                <div class="profile-comments__controls">
-                  <a href="#"><i class="fa fa-share-square-o"></i></a>
-                  <a href="#"><i class="fa fa-edit"></i></a>
-                  <a href="#"><i class="fa fa-trash-o"></i></a>
-                </div>
-                <div class="profile-comments__avatar">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="...">
-                </div>
-                <div class="profile-comments__body">
-                  <h5 class="profile-comments__sender">
-                    Jane Doe <small>2 hours ago</small>
-                  </h5>
-                  <div class="profile-comments__content">
-                    Very funny!
-                  </div>
-                </div>
-              </div>
-              <div class="profile-comments__item">
-                <div class="profile-comments__controls">
-                  <a href="#"><i class="fa fa-share-square-o"></i></a>
-                  <a href="#"><i class="fa fa-edit"></i></a>
-                  <a href="#"><i class="fa fa-trash-o"></i></a>
-                </div>
-                <div class="profile-comments__avatar">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="...">
-                </div>
-                <div class="profile-comments__body">
-                  <h5 class="profile-comments__sender">
-                    Richard Roe <small>5 hours ago</small>
-                  </h5>
-                  <div class="profile-comments__content">
-                    Great guy, 10/10!
-                  </div>
-                </div>
-              </div>
-              <div class="profile-comments__item">
-                <div class="profile-comments__controls">
-                  <a href="#"><i class="fa fa-share-square-o"></i></a>
-                  <a href="#"><i class="fa fa-edit"></i></a>
-                  <a href="#"><i class="fa fa-trash-o"></i></a>
-                </div>
-                <div class="profile-comments__avatar">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="...">
-                </div>
-                <div class="profile-comments__body">
-                  <h5 class="profile-comments__sender">
-                    John Doe <small>1 day ago</small>
-                  </h5>
-                  <div class="profile-comments__content">
-                    Nice!
-                  </div>
-                </div>
-              </div>
-            </div>
+            <table class="table profile__table">
+              <tbody>
+                {% if user == profile.user %}
+                  <tr>
+                    <th><strong>Tutor Score</strong></th>
+                    {% if profile.tutor_score == None %}
+                      <td>Try tutoring other students to accrue ratings and build your tutor score.</td>
+                    {% else %}
+                      <td>{{ profile.tutor_score }}/10</td>
+                    {% endif %}
+                  </tr>
+                {% else %}
+                  <tr>
+                    <th><strong>Tutor Score</strong></th>
+                    {% if profile.tutor_score == None %}
+                      <td>This user currently has no Tutor Score.</td>
+                    {% else %}
+                      <td>{{ profile.tutor_score }}/10</td>
+                    {% endif %}
+                  </tr>
+                  <tr>
+                    <th>
+                      <a class="btn btn-sm btn-outline-info" href="{% url 'review' profile.id %}">Leave Rating</a>
+                    </th>
+                  </tr>
+                {% endif %}
+              </tbody>
+            </table>
           </div>
         </div>
 
