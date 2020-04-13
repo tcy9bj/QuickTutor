@@ -23,7 +23,7 @@ def login(request):
 
 @login_required
 def home(request):
-	tutors = Profile.objects.filter(active=True)
+	tutors = Profile.objects.filter(active=True).exclude(user=request.user)
 	context = {'tutors':tutors, 'locations':tutor_locations}
 	return render(request, 'tutor/home.html', context)
 

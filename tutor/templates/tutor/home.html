@@ -8,20 +8,17 @@
 			<h1><u>Active Tutors</u></h1>
 			{% if tutors %}
 				{% for tutor in tutors %}
-					{% if tutor == user.profile %}
+					{% if tutor.major2 %}
+						<div class="content-section">
+							<h3><a class="tutor-listing" href="{% url 'profile_page' tutor.id %}">{{ tutor.first_name }} {{ tutor.last_name }}</a></h3>
+							<h5><small>Majors: {{tutor.major}}, {{tutor.major2}} | Location: {{ tutor.location }}</small></h5>
+						</div>
 					{% else %}
-						{% if tutor.major2 %}
-							<div class="content-section">
-								<h3><a class="tutor-listing" href="{% url 'profile_page' tutor.id %}">{{ tutor.first_name }} {{ tutor.last_name }}</a></h3>
-								<h5><small>Majors: {{tutor.major}}, {{tutor.major2}} | Location: {{ tutor.location }}</small></h5>
-							</div>
-						{% else %}
-							<div class="content-section">
-								<h3><a class="tutor-listing" href="{% url 'profile_page' tutor.id %}">{{ tutor.first_name }} {{ tutor.last_name }}</a></h3>
-								<h5><small>Major: {{tutor.major}} | Location: {{ tutor.location }}</small></h5>
-							</div>
-						{% endif %}
-					{% endif%}
+						<div class="content-section">
+							<h3><a class="tutor-listing" href="{% url 'profile_page' tutor.id %}">{{ tutor.first_name }} {{ tutor.last_name }}</a></h3>
+							<h5><small>Major: {{tutor.major}} | Location: {{ tutor.location }}</small></h5>
+						</div>
+					{% endif %}
 				{% endfor %}
 			{% else %}
 				<p>There currently aren't any active tutors</p>
@@ -56,10 +53,10 @@
 	            		<fieldset class="form-group">
 	            			<label for="location_selector">Set location:</label>
 	            			<select multiple class="form-control" id="location_selector" name="location_selector">
-	            			{% for location in locations %}
-	            				<option value="{{ location }}">{{ location }}</option>
-	            			{% endfor %}
-	            		</select>
+		            			{% for location in locations %}
+		            				<option value="{{ location }}">{{ location }}</option>
+		            			{% endfor %}
+	            			</select>
 	            		</fieldset>
 	            		{% if error_message %}
 	            			<p style="color: red">{{ error_message }}</p>
