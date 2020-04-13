@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users.apps.UsersConfig',
+    'tutor.apps.TutorConfig',
 
     #Google login
     'django.contrib.sites',
@@ -49,9 +51,6 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-
-    'users.apps.UsersConfig',
-    'tutor.apps.TutorConfig',
 ]
 
 MIDDLEWARE = [
