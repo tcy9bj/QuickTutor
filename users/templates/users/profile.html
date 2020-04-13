@@ -51,10 +51,6 @@
                   {% endif %}
                 </tr>
                 <tr>
-                  <th><strong>Email</strong></th>
-                  <td> {{ profile.email }} </td>
-                </tr>
-                <tr>
                   <th><strong>Classes</strong></th>
                   <td>CS 3240, CS 3330, CS 4102</td>
                 </tr>
@@ -71,14 +67,6 @@
           <div class="panel-body">
             <table class="table profile__table">
               <tbody>
-                <tr>
-                  <th><strong>Sessions</strong></th>
-                  <td>124</td>
-                </tr>
-                <tr>
-                  <th><strong>Member since</strong></th>
-                  <td>Jan 01, 2016</td>
-                </tr>
                 <tr>
                   <th><strong>Status</strong></th>
                   {% if user.profile.active %}
@@ -118,11 +106,6 @@
                       <td>{{ profile.tutor_score }}/10</td>
                     {% endif %}
                   </tr>
-                  <tr>
-                    <th>
-                      <a class="btn btn-sm btn-outline-info" href="{% url 'review' profile.id %}">Leave Rating</a>
-                    </th>
-                  </tr>
                 {% endif %}
               </tbody>
             </table>
@@ -142,33 +125,10 @@
 
         <hr class="profile__contact-hr">
 
-        <!-- Contact info -->
-        <div class="profile__contact-info">
-          <div class="profile__contact-info-item">
-            <div class="profile__contact-info-icon">
-              <i class="fa fa-phone"></i>
-            </div>
-            <div class="profile__contact-info-body">
-              <h5 class="profile__contact-info-heading">Message</h5>
-              <p>434-000-0000</p>
-            </div>
-          </div>
-          <div class="profile__contact-info-item">
-            <div class="profile__contact-info-icon">
-              <i class="fa fa-phone"></i>
-            </div>
-          </div>
-          <div class="profile__contact-info-item">
-            <div class="profile__contact-info-icon">
-              <i class="fa fa-envelope-square"></i>
-            </div>
-          </div>
-          <div class="profile__contact-info-item">
-            <div class="profile__contact-info-icon">
-              <i class="fa fa-map-marker"></i>
-            </div>
-          </div>
-        </div>
+        <!--Leave a review-->
+        <p style="display: block; text-align: center;">
+          <a class="btn btn-sm btn-outline-info" href="{% url 'review' profile.id %}">Leave Rating</a>
+        </p>
 
       </div>
     </div>
