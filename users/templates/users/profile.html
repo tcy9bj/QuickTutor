@@ -115,7 +115,8 @@
       </div>
       <div class="col-xs-12 col-sm-3">
 
-        <!-- Contact user -->
+
+        <!-- Contact user  *** If statement here?-->
         <p>
           <!-- Note: unlike other places on this page, the request url takes a User id not a Profile id -->
           <a href="{% url 'request' profile.user.id %}" class="profile__contact-btn btn btn-lg btn-block btn-info" data-toggle="modal" data-target="#profile__contact-form">
@@ -127,7 +128,15 @@
 
         <!--Leave a review-->
         <p style="display: block; text-align: center;">
-          <a class="btn btn-sm btn-outline-info" href="{% url 'review' profile.id %}">Leave Rating</a>
+          <a class="btn btn-lg btn-outline-info" href="{% url 'review' profile.id %}">Leave Rating</a>
+        </p>
+
+        <hr class="profile__contact-hr">
+
+        <p>
+          <a href="{% url 'edit_profile' profile.id %}" class="profile__contact-btn btn btn-lg btn-block btn-info" data-toggle="modal" data-target="#profile__contact-form">
+            Edit Profile
+          </a>
         </p>
 
       </div>
