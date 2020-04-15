@@ -9,27 +9,13 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'tutor/profile.css' %}">
 
-<div class="container mt-2">
+<div class="container mt-3">
   <div class="row">
     <div class="col-xs-12 col-sm-9">
       <!-- User profile -->
-      <div class="panel panel-default">
-        <div class="panel-heading">
-        <h1>User Profile</h1> <!--  class="panel-title" *removed from this tag -->
-        </div>
+      <div class="panel panel-default mt-2">
         <div class="media">
-          <img class="rounded-circle account-img" src="{{ profile.image.url }}" alt="...">
-          <div class="media-body">
-            <h4>{{ profile.first_name }} {{ profile.last_name }}</h4>
-            {% if profile.major2 %}
-              <h4><small>Majors: {{ profile.major }}, {{ profile.major2 }}</small></h4>
-            {% else %}
-              <h4><small>Major: {{ profile.major }}</small></h4>
-            {% endif %}
-            <p class="text-muted">
-              {{ profile.description }}
-            </p>
-          </div>
+          <h1><img class="rounded-circle account-img align-middle" src="{{ profile.image.url }}" alt="...">{{ profile.first_name }} {{ profile.last_name }}</h1>
         </div>
       </div>
 
@@ -42,6 +28,14 @@
           <table class="table profile__table">
             <tbody>
               <tr>
+                <th><strong>Status</strong></th>
+                {% if user.profile.active %}
+                  <td>Active</td>
+                {% else %}
+                  <td>Inactive</td>
+                {% endif %}
+              </tr>
+              <tr>
                 <th><strong>Major(s)</strong></th>
                 {% if profile.major2 %}
                   <td>{{ profile.major }}, {{ profile.major2 }}</td>
@@ -50,29 +44,8 @@
                 {% endif %}
               </tr>
               <tr>
-                <th><strong>Classes</strong></th>
-                <td>CS 3240, CS 3330, CS 4102</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Community -->
-      <div class="panel panel-default">
-        <div class="panel-heading">
-        <h4 class="panel-title">Community</h4>
-        </div>
-        <div class="panel-body">
-          <table class="table profile__table">
-            <tbody>
-              <tr>
-                <th><strong>Status</strong></th>
-                {% if user.profile.active %}
-                  <td>Active</td>
-                {% else %}
-                  <td>Inactive</td>
-                {% endif %}
+                <th><strong>Description</strong></th>
+                <td>{{ profile.description }}</td>
               </tr>
             </tbody>
           </table>
@@ -111,6 +84,8 @@
         </div>
       </div>
     </div>
+
+    <!-- Side Buttons -->
     <div class="col-xs-12 col-sm-3">
       {% if user == profile.user %}
         <!-- Edit profile -->
@@ -122,7 +97,7 @@
       {% else %}
         <!-- Contact user  *** If statement here?-->
         <p>
-          <!-- Note: The request url takes a User id not a Profile id -->
+          <!-- Note: The request url takes a User id not a Profile id like elsewhere -->
           <a href="{% url 'request' profile.user.id %}" class="profile__contact-btn btn btn-lg btn-block btn-info" data-toggle="modal" data-target="#profile__contact-form">
             Request Help
           </a>
