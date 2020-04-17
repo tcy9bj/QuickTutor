@@ -36,7 +36,7 @@
       <!-- User info -->
       <div class="panel panel-default">
         <div class="panel-heading">
-        <h4 class="panel-title">User info</h4>
+        <h4 class="panel-title">User Info</h4>
         </div>
         <div class="panel-body">
           <table class="table profile__table">
@@ -48,10 +48,6 @@
                 {% else %}
                   <td>{{ profile.major }}</td>
                 {% endif %}
-              </tr>
-              <tr>
-                <th><strong>Classes</strong></th>
-                <td>CS 3240, CS 3330, CS 4102</td>
               </tr>
             </tbody>
           </table>
@@ -120,7 +116,7 @@
           </a>
         </p>
       {% else %}
-        <!-- Contact user  *** If statement here?-->
+        <!-- Contact user -->
         <p>
           <!-- Note: The request url takes a User id not a Profile id -->
           <a href="{% url 'request' profile.user.id %}" class="profile__contact-btn btn btn-lg btn-block btn-info" data-toggle="modal" data-target="#profile__contact-form">
