@@ -1,9 +1,29 @@
-{% extends "tutor/base.html" %}
+{% load static %}
 {% load crispy_forms_tags %}
 
-{% block content %}
-	<div class="d-flex justify-content-center">
-		<div class="content-section" style="width: 600px;">
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Local CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'tutor/main.css' %}">
+
+    <!-- Site title (shown in tab) -->
+    <title>Quick Tutor</title>
+</head>
+<body>
+	<div class="d-flex justify-content-center" style="background-image: url(../../static/tutor/images/library.jpeg); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+		{% if messages %}
+	      {% for message in messages %}
+	      {% endfor %}
+	    {% endif %}
+		<div class="content-section mt-3 mb-3" style="width: 600px;">
 			<form method="POST" enctype="multipart/form-data">
 				{% csrf_token %}
 				<fieldset class="form-group">
@@ -17,4 +37,5 @@
 			</form>
 		</div>
 	</div>
-{% endblock content %}
+</body>
+</html>	
