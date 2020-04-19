@@ -6,7 +6,7 @@
 <div class="row">
 	<!--Show Active Outgoing Tutor Requests-->
 	<div class="col-md-6">
-    	<div class="content-section section-3">
+    	<div class="content-section section-3" style="text-align: center;">
 			<div>
 				<h3 style="display: inline;">Outgoing Tutor Requests</h3>
 				<hr>
@@ -19,7 +19,7 @@
 	                        <div class="col request-listing border-bottom">
 								<!--Requester Info-->
 								<div style="display: block; text-align: center;">
-									<h5>Sent to: {{ request.receiver.profile.first_name }} {{ request.receiver.profile.last_name }} - Course: {{ request.course }}</h5>
+									<h5>Sent to: <b>{{ request.receiver.profile.first_name }} {{ request.receiver.profile.last_name }}</b> - Course: <b>{{ request.course }}</b></h5>
 									<p>Request Status: <b class="text-success">Accepted</b></p>
 									<a class="btn btn-outline-info mb-3" href="{% url 'ask-detail' request.id %}" role="button">View Details</a>
 								</div>
@@ -28,7 +28,7 @@
 	                        <div class="col request-listing border-bottom">
 								<!--Requester Info-->
 								<div style="display: block; text-align: center;">
-									<h5>Sent to: {{ request.receiver.profile.first_name }} {{ request.receiver.profile.last_name }} - Course: {{ request.course }}</h5>
+									<h5>Sent to: <b>{{ request.receiver.profile.first_name }} {{ request.receiver.profile.last_name }}</b> - Course: <b>{{ request.course }}</b></h5>
 									<p>Request Status: <b class="text-danger">Declined</b></p>
 									<a class="btn btn-outline-info mb-3" href="{% url 'ask-detail' request.id %}" role="button">View Details</a>
 								</div>
@@ -37,7 +37,7 @@
 	                        <div class="col request-listing border-bottom">
 								<!--Requester Info-->
 								<div style="display: block; text-align: center;">
-									<h5>Sent to: {{ request.receiver.profile.first_name }} {{ request.receiver.profile.last_name }} - Course: {{ request.course }}</h5>
+									<h5>Sent to: <b>{{ request.receiver.profile.first_name }} {{ request.receiver.profile.last_name }}</b> - Course: <b>{{ request.course }}</b></h5>
 									<p>Request Status: <b class="text-secondary">Pending</b></p>
 									<a class="btn btn-outline-info mb-3" href="{% url 'ask-detail' request.id %}" role="button">View Details</a>
 								</div>
@@ -54,7 +54,7 @@
 
 	<!--Show Active Incoming Tutor Requests-->
 	<div class="col-md-6">
-    	<div class="content-section section-3">
+    	<div class="content-section section-3" style="text-align: center;">
 			<div>
 				<h3 style="display: inline;">Incoming Tutor Requests</h3>
 				<hr>
@@ -65,7 +65,7 @@
 	                {% for request in incoming_requests %}
 	                    <div class="col request-listing border-bottom">
 							<div style="display: block; text-align: center;">
-								<h5>Request from: {{ request.sender.profile.first_name }} {{ request.sender.profile.last_name }} - Course: {{ request.course }}</h5>
+								<h5>Request from: <b>{{ request.sender.profile.first_name }} {{ request.sender.profile.last_name }}</b> - Course: <b>{{ request.course }}</b></h5>
 								<a class="btn btn-outline-info mb-3" href="{% url 'ask-detail' request.id %}" role="button">View Details</a>
 							</div>
 	                    </div>
@@ -74,30 +74,12 @@
 				{% else %}
 					<p>No requests received</p>
 				{% endif %}
-
-				<!--
-				<div class="col request-listing">
-					<div style="display: block; text-align: center;">
-						<h5>Matt Hoffman  - CS 2150</h5>
-					</div>
-			
-					<div style="display: block; text-align: center;">
-						<p>I need help with trees and rotations</p>
-					</div>
-					
-					<div style="display: block; text-align: center;">
-						<button type="button" class="btn btn-success">Accept</button>
-						<button type="button" class="btn btn-danger">Deny</button>
-					</div>
-				</div>
-			-->
-
 			</div>
     	</div>
 	</div>
 </div>
 <div class="row">
-    <div class="content-section section-3 box mb-3">
+    <div class="content-section section-3 box mb-3" style="text-align: center;">
         <div>
 			<h3 style="display: inline;">Current Client</h3>
 			<hr>
