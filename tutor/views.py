@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 from users.models import Profile
 from tutor.forms import RequestForm
@@ -39,6 +40,7 @@ def activate(request, profile_id):
 		profile.location = selected_location
 		profile.active = True
 		profile.save()
+		messages.success(request, f'You have been marked as an active tutor; students may now request assistance from you.')
 	return redirect('home')
 
 @login_required
@@ -49,6 +51,7 @@ def deactivate(request, profile_id):
 	profile.active = False
 	context = {'tutors':tutors, 'locations':tutor_locations}
 	profile.save()
+	messages.success(request, f'You have been marked as inactive; students may no longer request you as a tutor.')
 	return redirect('home')
 
 @login_required
@@ -63,6 +66,7 @@ def request(request, tutor_id):
 			ask.sender = sender
 			ask.receiver = receiver
 			ask.save()
+			messages.success(request, f'Your request has been sent. You can view it under \'Outgoing Tutor Requests\' in the Requests tab.')
 			return redirect('home')
 	else:
 		form = RequestForm()
