@@ -4,19 +4,19 @@
 
 <div class="row">
 	<div class="col-md-7 mb-3">
-		<div class="content-section section-3 box" style="text-align: center;">
+		<div class="content-section section-3 box" style="text-align: center; overflow-y: auto; max-height: 50em;">
 			<h3 style="display: inline;">Active Tutors</h3>
 			<hr>
 			{% if tutors %}
 				{% for tutor in tutors %}
 					{% if tutor.major2 %}
 						<div class="col request-listing border-bottom" style="display: block; text-align: center;">
-							<h3><a class="tutor-listing" href="{% url 'profile_page' tutor.id %}">{{ tutor.first_name }} {{ tutor.last_name }}</a></h3>
+							<h4><a class="tutor-listing" href="{% url 'profile_page' tutor.id %}">{{ tutor.first_name }} {{ tutor.last_name }}</a></h4>
 							<h5><small><b>Majors</b>: {{tutor.major}}, {{tutor.major2}} | <b>Location</b>: {{ tutor.location }}</small></h5>
 						</div>
 					{% else %}
 						<div class="col request-listing border-bottom" style="display: block; text-align: center;">
-							<h3><a class="tutor-listing" href="{% url 'profile_page' tutor.id %}">{{ tutor.first_name }} {{ tutor.last_name }}</a></h3>
+							<h4><a class="tutor-listing" href="{% url 'profile_page' tutor.id %}">{{ tutor.first_name }} {{ tutor.last_name }}</a></h4>
 							<h5><small><b>Major</b>: {{tutor.major}} | <b>Location</b>: {{ tutor.location }}</small></h5>
 						</div>
 					{% endif %}
@@ -28,7 +28,7 @@
 		</div>
 	</div>
     <div class="col-md-5">
-    	<div class="content-section section-3">
+    	<div class="content-section section-3" style="text-align: center;">
     		{% if user.profile.active %}
         		<div>
         			<h3 style="display: inline;">Current Tutor Status: </h3>
@@ -53,7 +53,7 @@
 	            	<form action="{% url 'activate' user.profile.id %}" method="POST">
 	            		{% csrf_token %}
 	            		<fieldset class="form-group">
-	            			<label for="location_selector">Set location:</label>
+	            			<label for="location_selector">Choose a Location:</label>
 	            			<select multiple class="form-control" id="location_selector" name="location_selector">
 		            			{% for location in locations %}
 		            				<option value="{{ location }}">{{ location }}</option>
