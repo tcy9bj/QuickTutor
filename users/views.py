@@ -54,6 +54,10 @@ class AskDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 	model = Ask
 	template_name = 'users/ask_confirm_delete.html'
 
+	def delete(self, request, *args, **kwargs):
+		messages.success(self.request, "Your request was successfully deleted.")
+		return super(AskDeleteView, self).delete(request, *args, **kwargs)
+
 	def get_success_url(self):
 		return reverse('inbox')
 
@@ -67,6 +71,10 @@ class AskDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class AskCompleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 	model = Ask
 	template_name = 'users/ask_confirm_completion.html'
+
+	def delete(self, request, *args, **kwargs):
+		messages.success(self.request, "Your current request has been completed. You may now accept other incoming requests.")
+		return super(AskCompleteView, self).delete(request, *args, **kwargs)
 
 	def get_success_url(self):
 		return reverse('inbox')
@@ -93,6 +101,7 @@ def accept_ask(request, ask_id):
 	profile.current_client = ask
 	ask.save()
 	profile.save()
+	messages.success(request, "You have accepted " + ask.sender.profile.first_name + "'s request for tutoring. You can view his contact information under the current client section.")
 	return redirect('inbox')
 
 @login_required
@@ -100,7 +109,7 @@ def decline_ask(request, ask_id):
 	ask = get_object_or_404(Ask, pk=ask_id)
 	ask.declined = True
 	ask.save()
-	messages.info(request, f'The request has been declined.')
+	messages.info(request, f"You have declined " + ask.sender.profile.first_name + "'s request.")
 	return redirect('inbox')
 
 @login_required
@@ -119,6 +128,7 @@ def review(request, profile_id):
 			new_tutor_score = profile.tutor_score + ((rating - profile.tutor_score) / profile.num_ratings)
 			profile.tutor_score = round(new_tutor_score, 2)
 		profile.save()
+		messages.success(request, f'Rating successfully submitted.')
 		return redirect('profile_page', profile_id=profile.id)
 
 	return render(request, 'users/review.html', {'profile':profile})
