@@ -107,7 +107,10 @@ def decline_ask(request, ask_id):
 def review(request, profile_id):
 	profile = get_object_or_404(Profile, pk=profile_id)
 	if request.method == 'POST':
-		rating = float(request.POST.get('rating'))
+		rating = request.POST.get('rating')
+		if(rating == ""):
+			return render(request, 'users/review.html', {'profile':profile, 'error_message':"Please enter a valid rating."})
+		rating = float(rating)
 		if (profile.tutor_score == None):
 			profile.tutor_score = rating
 			profile.num_ratings += 1

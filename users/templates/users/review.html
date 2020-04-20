@@ -2,13 +2,16 @@
 {% load static %}
 
 {% block content %}
-    <div class="container d-flex justify-content-center">
+    <div class="container d-flex justify-content-center" style="text-align: center;">
         <div class="content-section w-50 mt-3">
+            {% if error_message %}
+            <p style="color: red">{{ error_message }}</p>
+            {% endif %}
             <form method='post'>
                 {% csrf_token %}
                 <fieldset class="form-group">
                     <legend class="border-bottom mb-4">Leave a Rating for {{ profile.first_name }} {{ profile.last_name }}</legend>
-                    <p>Please make sure your rating is an accurate representation of your experience.</p>
+                    <p>Please make sure your rating is an accurate representation of your experience with this tutor.</p>
                     <label for="rating">Tutor Rating (0-10):</label>
                     <input type="number" id="rating" name="rating" min="0" max="10">
                     <div class="form-group">
