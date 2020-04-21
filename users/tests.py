@@ -87,7 +87,6 @@ class ProfileTestCase(TestCase):
         self.assertEqual(self.user.profile.image, "default.png")
         self.assertFalse(self.user.profile.initialized)
 
-'''
     def test_register_view_fills_out_new_user_profiles(self):
         self.assertFalse(self.user.profile.initialized)
         post_data = {'user':self.user, 'username':'tester1', 'email':'tester1@gmail.com', 
@@ -95,6 +94,7 @@ class ProfileTestCase(TestCase):
                      'phone_number':'909-285-7438', 'description':'This test succeeded'}
         response = self.client.post('/users/register/', post_data, follow=True)
         #self.assertEqual(response.redirect_chain, "")
-        self.assertTrue(self.user.profile.initialized)
-        self.assertEqual(self.user.profile.description, 'This test succeeded')
-'''
+        profile_id = self.user.profile.id
+        profile = Profile.objects.get(id=profile_id)
+        self.assertTrue(profile.initialized)
+        self.assertEqual(profile.description, 'This test succeeded')
