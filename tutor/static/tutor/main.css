@@ -23,10 +23,9 @@ ul {
 }
 
 .section-1{
-  height: 50vh;
-  background-image: url(../../static/tutor/images/library.jpeg);
+  height: 25vh;
+  background-image: url(../../static/tutor/images/rotunda2.jpeg);
   background-attachment: fixed;
-  background-size: cover;
 }
 
 .section-3{
