@@ -18,6 +18,13 @@
           <img class="rounded-circle account-img" src="{{ profile.image.url }}" alt="...">
           <div class="media-body">
             <h1>{{ profile.first_name }} {{ profile.last_name }}</h1>
+            {% if profile.active %}
+                <h4 style="display: inline;">Status: </h4>
+                <h3 style="display: inline; color: green;">Active</h3>
+            {% else %}
+              <h4 style="display: inline;">Status: </h4>
+              <h3 style="display: inline; color: red;">Inactive</h3>
+            {% endif %}
             <p class="text-muted">{{ profile.description }}</p>
           </div>
         </div>
@@ -43,6 +50,7 @@
                 <th><strong>Courses</strong></th>
                 <td>{{ profile.courses }}</td>
               </tr>
+              <!-- Moved elsewhere 
               <tr>
                 <th><strong>Status</strong></th>
                 {% if profile.active %}
@@ -51,32 +59,11 @@
                   <td>Inactive</td>
                 {% endif %}
               </tr>
+              -->
             </tbody>
           </table>
         </div>
       </div>
-
-      <!-- Community 
-      <div class="panel panel-default">
-        <div class="panel-heading">
-        <h4 class="panel-title">Community</h4>
-        </div>
-        <div class="panel-body">
-          <table class="table profile__table">
-            <tbody>
-              <tr>
-                <th><strong>Status</strong></th>
-                {% if profile.active %}
-                  <td>Active</td>
-                {% else %}
-                  <td>Inactive</td>
-                {% endif %}
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      -->
 
       <!-- Tutor Ratings -->
       <div class="panel panel-default">
