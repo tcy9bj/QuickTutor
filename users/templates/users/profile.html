@@ -14,35 +14,38 @@
     <div class="col-xs-12 col-sm-9">
       <!-- User profile -->
       <div class="panel panel-default">
-        <div class="panel-heading">
-        </div>
-        <div class="media">
+        <div class="media mt-3">
           <img class="rounded-circle account-img" src="{{ profile.image.url }}" alt="...">
           <div class="media-body">
-            <h4><b>{{ profile.first_name }} {{ profile.last_name }}</b></h4>
-            {% if profile.major2 %}
-              <h4><small><b>Majors</b>: {{ profile.major }}, {{ profile.major2 }}</small></h4>
-            {% else %}
-              <h4><small><b>Major</b>: {{ profile.major }}</small></h4>
-            {% endif %}
-            <p class="text-muted">
-              {{ profile.description }}
-            </p>
+            <h1>{{ profile.first_name }} {{ profile.last_name }}</h1>
+            <p class="text-muted">{{ profile.description }}</p>
           </div>
         </div>
-      </div> 
+      </div>
 
-      <!-- Community -->
+      <!-- User info -->
       <div class="panel panel-default">
         <div class="panel-heading">
-        <h4 class="panel-title">Community</h4>
+          <h4 class="panel-title">User Info</h4>
         </div>
         <div class="panel-body">
           <table class="table profile__table">
             <tbody>
               <tr>
+                <th><strong>Major(s)</strong></th>
+                {% if profile.major2 %}
+                  <td>{{ profile.major }}, {{ profile.major2 }}</td>
+                {% else %}
+                  <td>{{ profile.major }}</td>
+                {% endif %}
+              </tr>
+              <tr>
+                <th><strong>Courses</strong></th>
+                <td>{{ profile.courses }}</td>
+              </tr>
+              <tr>
                 <th><strong>Status</strong></th>
-                {% if user.profile.active %}
+                {% if profile.active %}
                   <td>Active</td>
                 {% else %}
                   <td>Inactive</td>
@@ -52,6 +55,28 @@
           </table>
         </div>
       </div>
+
+      <!-- Community 
+      <div class="panel panel-default">
+        <div class="panel-heading">
+        <h4 class="panel-title">Community</h4>
+        </div>
+        <div class="panel-body">
+          <table class="table profile__table">
+            <tbody>
+              <tr>
+                <th><strong>Status</strong></th>
+                {% if profile.active %}
+                  <td>Active</td>
+                {% else %}
+                  <td>Inactive</td>
+                {% endif %}
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      -->
 
       <!-- Tutor Ratings -->
       <div class="panel panel-default">
