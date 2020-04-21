@@ -14,7 +14,7 @@ class Profile(models.Model):
 	phone_regex = RegexValidator(regex=r'([0-9]{3}-){2}[0-9]{4}', message="Phone number must be entered in the format: 999-999-9999.")
 	phone_number = models.CharField(validators=[phone_regex], max_length=12, blank=False)
 	courses = models.TextField(blank=True, help_text="List any courses you feel comfortable tutoring for.")
-	description = models.TextField(blank=True)
+	description = models.TextField(blank=True, verbose_name="bio", help_text="Write a brief description of yourself. Be sure to include areas of strength for tutoring and any other information you would like other users to know.")
 	location = models.CharField(max_length=50, blank=True, default='')
 	current_client = models.OneToOneField(Ask, on_delete=models.SET_NULL, null=True, blank=True)
 	tutor_score = models.FloatField(null=True, blank=True)

@@ -7,6 +7,7 @@ class ProfileUpdateForm(forms.ModelForm):
 	major2 = forms.CharField(label="2nd Major", required=False)
 	phone_number = forms.RegexField(regex=r'([0-9]{3}-){2}[0-9]{4}',
 									help_text="Phone number must be entered in the format: 123-456-7890")
+
 	class Meta:
 		model = Profile
 		fields = ['first_name', 'last_name', 'major', 'major2', 'phone_number', 'courses', 'description', 'image']
