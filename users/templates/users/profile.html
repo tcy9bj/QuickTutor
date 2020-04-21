@@ -56,7 +56,7 @@
         </div>
       </div>
 
-      <!-- Community 
+      <!-- Community
       <div class="panel panel-default">
         <div class="panel-heading">
         <h4 class="panel-title">Community</h4>
@@ -103,6 +103,20 @@
                   {% else %}
                     <td>{{ profile.tutor_score }}/10 <small>based on {{profile.num_ratings}} ratings</small></td>
                   {% endif %}
+                </tr>
+                <tr>
+                  <th><strong>Feedback</strong></th>
+                    {% if profile.tutor_score == None %}
+                      <td>This user currently has no feedback.</td>
+                    {% else %}
+                      <!-- <td>
+                        <table width="600">
+                        {% for review in object_list %}
+                            <td>{{review}}</td>
+                        {% endfor %}
+                        </table>
+                      <td> -->
+                    {% endif %}
                 </tr>
               {% endif %}
             </tbody>

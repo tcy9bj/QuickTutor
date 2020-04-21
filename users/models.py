@@ -33,3 +33,9 @@ class Profile(models.Model):
 			output_size = (300, 300)
 			img.thumbnail(output_size)
 			img.save(self.image.path)
+
+class Comment(models.Model):
+	# reviewer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviewer')
+	# reviewee = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tutor')
+	rating = models.IntegerField(blank=True, default=0)
+	comment_text = models.CharField(max_length=200)

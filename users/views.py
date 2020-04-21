@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import UserUpdateForm, ProfileUpdateForm
+from .forms import UserUpdateForm, ProfileUpdateForm, FeedbackForm
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import DetailView, DeleteView
 from django.contrib import messages
 from django.urls import reverse
-from users.models import Profile
+from users.models import Profile, Comment
 from tutor.models import Ask
 
 @login_required
@@ -114,24 +114,36 @@ def decline_ask(request, ask_id):
 
 @login_required
 def review(request, profile_id):
-	profile = get_object_or_404(Profile, pk=profile_id)
 	if request.method == 'POST':
+		form = FeedbackForm(request.POST)
 		rating = request.POST.get('rating')
+		profile = get_object_or_404(Profile, pk=profile_id)
 		if(rating == ""):
 			return render(request, 'users/review.html', {'profile':profile, 'error_message':"Please enter a valid rating."})
-		rating = float(rating)
-		if (profile.tutor_score == None):
-			profile.tutor_score = rating
-			profile.num_ratings += 1
-		else:
-			profile.num_ratings += 1
-			new_tutor_score = profile.tutor_score + ((rating - profile.tutor_score) / profile.num_ratings)
-			profile.tutor_score = round(new_tutor_score, 2)
-		profile.save()
-		messages.success(request, f'Rating successfully submitted.')
-		return redirect('profile_page', profile_id=profile.id)
+		if form.is_valid():
+			rating = float(rating)
+			if (profile.tutor_score == None):
+				profile.tutor_score = rating
+				profile.num_ratings += 1
+			else:
+				profile.num_ratings += 1
+				new_tutor_score = profile.tutor_score + ((rating - profile.tutor_score) / profile.num_ratings)
+				profile.tutor_score = round(new_tutor_score, 2)
+			profile.save()
+			# reviewer = request.user.profile_id
+			post = form.save(commit=False)
+			post.author = request.user
+			post.save()
+			messages.success(request, f'Rating successfully submitted.')
+			return redirect('profile_page', profile_id=profile_id)
+	else:
+		form = FeedbackForm()
+	return render(request, 'users/review.html', {'form':form})
 
-	return render(request, 'users/review.html', {'profile':profile})
+def showReviews(request):
+	allreviews = Comment.objects.all()
+	context = {'obj_list': allreviews}
+	return render(request, 'users/profile.html', context)
 
 def edit_profile(request, profile_id):
 	if (request.method == 'POST'):

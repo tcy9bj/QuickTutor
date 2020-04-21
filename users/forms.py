@@ -1,6 +1,6 @@
 #Some code from: https://medium.com/@jainsahil1997/simple-google-authentication-in-django-58101a34736b
 from django import forms
-from .models import Profile
+from .models import Profile, Comment
 from django.contrib.auth.models import User
 
 class ProfileUpdateForm(forms.ModelForm):
@@ -18,3 +18,9 @@ class UserUpdateForm(forms.ModelForm):
 	class Meta:
 		model = User
 		fields = ['username', 'email']
+
+class FeedbackForm(forms.ModelForm):
+
+	class Meta:
+		model = Comment
+		fields = ['rating', 'comment_text']
