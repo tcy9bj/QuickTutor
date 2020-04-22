@@ -39,13 +39,13 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" style="color: white; font-weight: bold;" href="{% url 'home' %}">Home</a>
-              <a class="nav-item nav-link" style="color: white; font-weight: bold;" href="{% url 'profile_page' user.profile.id %}">Profile</a>
-              <a class="nav-item nav-link" style="color: white; font-weight: bold;" href="{% url 'inbox' %}">Requests</a>
+              <a class="nav-item nav-button" href="{% url 'home' %}">Home</a>
+              <a class="nav-item nav-button" href="{% url 'profile_page' user.profile.id %}">Profile</a>
+              <a class="nav-item nav-button" href="{% url 'inbox' %}">Requests</a>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
-              <a id="logout" href="{% url 'account_logout' %}" style="color: white; font-weight: bold;">Logout</a>
+              <a class="nav-button" id="logout" href="{% url 'account_logout' %}" >Logout</a>
             </div>
           </div>
         </div>
@@ -68,8 +68,7 @@
 
   <!-- Footer -->
   <footer class="page-footer font-small footer py-3 static-bottom" style="text-align: center; background-color: #E6E6E6">
-    <!-- Copyright -->
-    <div class="text-center d-inline mr-3">Contact Us</div>
+    <!-- Copyright and FAQ-->
     <div class="footer-copyright text-center d-inline ml-3 mr-3"><a class="text-dark" href="https://www.twitch.tv/caelumcv">©</a> 2020 Copyright: Team QT-314</div>
     <div class="text-center d-inline ml-3">
       <a class="text-dark" href="{% url 'FAQ' %}">FAQ</a>
