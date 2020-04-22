@@ -30,6 +30,17 @@ ul {
   background-color: #5ca9d6;
 }
 
+.nav-button {
+  color: white;
+  font-weight: bold;
+  padding-right: 1em;
+}
+
+.nav-button:hover {
+  color: rgb(82,82,82);
+  text-decoration: none;
+}
+
 .site-header .navbar-nav .nav-link.active {
   font-weight: 500;
 }
