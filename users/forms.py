@@ -20,7 +20,8 @@ class UserUpdateForm(forms.ModelForm):
 		fields = ['username', 'email']
 
 class FeedbackForm(forms.ModelForm):
-
+	rating = forms.IntegerField(min_value=0, max_value=10)
+	
 	class Meta:
 		model = Comment
 		fields = ['rating', 'comment_text']

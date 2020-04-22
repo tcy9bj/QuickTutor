@@ -43,6 +43,25 @@
                 <th><strong>Courses</strong></th>
                 <td>{{ profile.courses }}</td>
               </tr>
+              {% if user == profile.user %}
+                <tr>
+                  <th><strong>Tutor Score</strong></th>
+                  {% if profile.tutor_score == None %}
+                    <td>Try tutoring other students to accrue ratings and build your tutor score.</td>
+                  {% else %}
+                    <td>{{ profile.tutor_score }}/10 <small>based on {{profile.num_ratings}} ratings</small></td>
+                  {% endif %}
+                </tr>
+              {% else %}
+                <tr>
+                  <th><strong>Tutor Score</strong></th>
+                  {% if profile.tutor_score == None %}
+                    <td>This user currently has no Tutor Score.</td>
+                  {% else %}
+                    <td>{{ profile.tutor_score }}/10 <small>based on {{profile.num_ratings}} ratings</small></td>
+                  {% endif %}
+                </tr>
+              {% endif %}
               <tr>
                 <th><strong>Status</strong></th>
                 {% if profile.active %}
@@ -81,46 +100,21 @@
       <!-- Tutor Ratings -->
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h4 class="panel-title">Ratings</h4>
+          <h4 class="panel-title">Reviews</h4>
         </div>
-        <div class="panel-body">
-          <table class="table profile__table">
-            <tbody>
-              {% if user == profile.user %}
-                <tr>
-                  <th><strong>Tutor Score</strong></th>
-                  {% if profile.tutor_score == None %}
-                    <td>Try tutoring other students to accrue ratings and build your tutor score.</td>
-                  {% else %}
-                    <td>{{ profile.tutor_score }}/10 <small>based on {{profile.num_ratings}} ratings</small></td>
-                  {% endif %}
-                </tr>
-              {% else %}
-                <tr>
-                  <th><strong>Tutor Score</strong></th>
-                  {% if profile.tutor_score == None %}
-                    <td>This user currently has no Tutor Score.</td>
-                  {% else %}
-                    <td>{{ profile.tutor_score }}/10 <small>based on {{profile.num_ratings}} ratings</small></td>
-                  {% endif %}
-                </tr>
-                <tr>
-                  <th><strong>Feedback</strong></th>
-                    {% if profile.tutor_score == None %}
-                      <td>This user currently has no feedback.</td>
-                    {% else %}
-                      <!-- <td>
-                        <table width="600">
-                        {% for review in object_list %}
-                            <td>{{review}}</td>
-                        {% endfor %}
-                        </table>
-                      <td> -->
-                    {% endif %}
-                </tr>
-              {% endif %}
-            </tbody>
-          </table>
+        <div class="panel-body mb-3">
+          {% for comment in comments %}
+            <article class="media content-section">
+              <img class="rounded-circle article-img" src="{{ comment.reviewer.profile.image.url }}">
+              <div class="media-body">
+                <div class="article-metadata">
+                  <a class="mr-2" href="{% url 'profile_page' comment.reviewer.profile.id %}">{{ comment.reviewer.profile.first_name }} {{ comment.reviewer.profile.last_name }}</a>
+                </div>
+                <p class="article-content">{{ comment.comment_text }}</p>
+                <p class="article-title">Rating: {{ comment.rating }}/10</p>
+              </div>
+            </article>
+          {% endfor %}
         </div>
       </div>
     </div>
@@ -143,7 +137,8 @@
 
         <!--Leave a review-->
         <p>
-          <a class="profile__contact-btn btn btn-lg btn-block btn-info" href="{% url 'review' profile.id %}">Leave Rating</a>
+          <!-- Note: The request url takes a User id not a Profile id -->
+          <a class="profile__contact-btn btn btn-lg btn-block btn-info" href="{% url 'review' profile.user.id %}">Leave Review</a>
         </p>
       {% endif %}
     </div>

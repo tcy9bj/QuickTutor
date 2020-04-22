@@ -34,8 +34,14 @@ class Profile(models.Model):
 			img.thumbnail(output_size)
 			img.save(self.image.path)
 
+	def get_absolute_url(self):
+		return reverse('profile_page', kwargs={'pk': self.pk})
+
 class Comment(models.Model):
-	# reviewer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviewer')
-	# reviewee = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tutor')
-	rating = models.IntegerField(blank=True, default=0)
-	comment_text = models.CharField(max_length=200)
+	reviewer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviewer')
+	reviewee = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviewee')
+	rating = models.IntegerField()
+	comment_text = models.TextField(verbose_name="comment")
+
+	def __str__(self):
+		return self.reviewer.profile.first_name + " " + self.reviewer.profile.last_name + "'s review of " + self.reviewee.profile.first_name + " " + self.reviewee.profile.last_name
