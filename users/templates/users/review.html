@@ -12,8 +12,13 @@
                 <fieldset class="form-group">
                     <legend class="border-bottom mb-4">Leave a Rating for {{ profile.first_name }} {{ profile.last_name }}</legend>
                     <p>Please make sure your rating is an accurate representation of your experience with this tutor.</p>
+                    <p> 0 = I would not work with this tutor again,10 = I would highly recommend this tutor to anybody!</p>
                     <label for="rating">Tutor Rating (0-10):</label>
                     <input type="number" id="rating" name="rating" min="0" max="10">
+                </fieldset>
+                <label for='comment_text'</label>
+                <textarea placeholder="Leave feedback here!" name="comment_text" rows="6" cols="50"></textarea>
+                <fieldset class="form-group">
                     <div class="form-group">
                         <button class="btn btn-outline-info mt-3" type="submit">Submit Review</button>
                     </div>
