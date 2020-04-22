@@ -93,7 +93,6 @@ class ProfileTestCase(TestCase):
                      'first_name':'Joe','last_name':'Smith', 'major':'Spanish', 'major2':'Foreign Affairs',
                      'phone_number':'909-285-7438', 'description':'This test succeeded'}
         response = self.client.post('/users/register/', post_data, follow=True)
-        #self.assertEqual(response.redirect_chain, "")
         profile_id = self.user.profile.id
         profile = Profile.objects.get(id=profile_id)
         self.assertTrue(profile.initialized)
