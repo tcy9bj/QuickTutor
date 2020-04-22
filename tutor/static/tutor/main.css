@@ -30,17 +30,6 @@ ul {
   background-color: #5ca9d6;
 }
 
-.site-header .navbar-nav .nav-link {
-  /*color: #e0e0e0;*/
-  color: white;
-  font-weight: bold;
-}
-
-.site-header .navbar-nav .nav-link:hover {
-  /*color: #ffffff;*/
-  color: rgb(82, 82, 82);
-}
-
 .site-header .navbar-nav .nav-link.active {
   font-weight: 500;
 }
@@ -101,7 +90,7 @@ a.tutor-listing:hover {
 }
 
 .resize {
-  max-width:100px;
+  max-width: 100px;
   max-height:75px;
 }
 
