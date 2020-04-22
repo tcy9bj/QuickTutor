@@ -13,5 +13,4 @@ urlpatterns = [
     path('request/<int:pk>/complete/', views.AskCompleteView.as_view(), name='ask-complete'),
     path('request/<int:ask_id>/accept/', views.accept_ask, name='ask-accept'),
     path('request/<int:ask_id>/decline/', views.decline_ask, name='ask-decline'),
-    path('FAQ/', views.FAQ, name='FAQ')
 ]

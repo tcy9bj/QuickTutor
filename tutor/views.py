@@ -71,3 +71,7 @@ def request(request, tutor_id):
 	else:
 		form = RequestForm()
 	return render(request, 'tutor/request.html', {'form':form, 'requested_tutor_id':tutor_id})
+
+@login_required
+def FAQ(request):
+	return render(request, 'tutor/FAQ.html', {'FAQ':FAQ})
