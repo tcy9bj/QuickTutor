@@ -4,7 +4,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-    """
     dependencies = [
         ('users', '0020_auto_20200421_2146'),
         ('users', '0017_auto_20200421_1350'),
@@ -12,4 +11,3 @@ class Migration(migrations.Migration):
 
     operations = [
     ]
-    """
