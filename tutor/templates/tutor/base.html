@@ -39,13 +39,13 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-button" href="{% url 'home' %}">Home</a>
-              <a class="nav-item nav-button" href="{% url 'profile_page' user.profile.id %}">Profile</a>
-              <a class="nav-item nav-button" href="{% url 'inbox' %}">Requests</a>
+              <a class="nav-item" style="color: white; font-weight: bold; padding-right: 1em;" href="{% url 'home' %}">Home</a>
+              <a class="nav-item" style="color: white; font-weight: bold; padding-right: 1em;" href="{% url 'profile_page' user.profile.id %}">Profile</a>
+              <a class="nav-item" style="color: white; font-weight: bold; padding-right: 1em;" href="{% url 'inbox' %}">Requests</a>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
-              <a class="nav-button" id="logout" href="{% url 'account_logout' %}" >Logout</a>
+              <a style="color: white; font-weight: bold; padding-right: 1em;" id="logout" href="{% url 'account_logout' %}" >Logout</a>
             </div>
           </div>
         </div>
