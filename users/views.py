@@ -35,9 +35,6 @@ def register(request):
 def profile_page(request, profile_id):
 	profile = get_object_or_404(Profile, pk=profile_id)
 	comments = profile.user.reviewee.all()
-	print(comments)
-	for comment in comments:
-		print(comment)
 	return render(request, 'users/profile.html', {'profile':profile, 'comments':comments})
 
 @login_required
