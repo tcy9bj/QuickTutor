@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import UserUpdateForm, ProfileUpdateForm, FeedbackForm
+from .forms import UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic import DetailView, DeleteView, CreateView
+from django.views.generic import DetailView, DeleteView
 from django.contrib import messages
 from django.urls import reverse
-from users.models import Profile, Comment
+from users.models import Profile
 from tutor.models import Ask
 
 @login_required
@@ -34,11 +34,7 @@ def register(request):
 @login_required
 def profile_page(request, profile_id):
 	profile = get_object_or_404(Profile, pk=profile_id)
-	comments = profile.user.reviewee.all()
-	print(comments)
-	for comment in comments:
-		print(comment)
-	return render(request, 'users/profile.html', {'profile':profile, 'comments':comments})
+	return render(request, 'users/profile.html', {'profile':profile})
 
 @login_required
 def inbox(request):
@@ -116,55 +112,27 @@ def decline_ask(request, ask_id):
 	messages.info(request, f"You have declined " + ask.sender.profile.first_name + "'s request.")
 	return redirect('inbox')
 
-'''
 @login_required
 def review(request, profile_id):
+	profile = get_object_or_404(Profile, pk=profile_id)
 	if request.method == 'POST':
-		form = FeedbackForm(request.POST)
 		rating = request.POST.get('rating')
-		profile = get_object_or_404(Profile, pk=profile_id)
 		if(rating == ""):
 			return render(request, 'users/review.html', {'profile':profile, 'error_message':"Please enter a valid rating."})
-		if form.is_valid():
-			rating = float(rating)
-			if (profile.tutor_score == None):
-				profile.tutor_score = rating
-				profile.num_ratings += 1
-			else:
-				profile.num_ratings += 1
-				new_tutor_score = profile.tutor_score + ((rating - profile.tutor_score) / profile.num_ratings)
-				profile.tutor_score = round(new_tutor_score, 2)
-			profile.save()
-			# reviewer = request.user.profile_id
-			post = form.save(commit=False)
-			post.author = request.user
-			post.save()
-			messages.success(request, f'Rating successfully submitted.')
-			return redirect('profile_page', profile_id=profile_id)
-	else:
-		form = FeedbackForm()
-	return render(request, 'users/review.html', {'form':form})
+		rating = float(rating)
+		if (profile.tutor_score == None):
+			profile.tutor_score = rating
+			profile.num_ratings += 1
+		else:
+			profile.num_ratings += 1
+			new_tutor_score = profile.tutor_score + ((rating - profile.tutor_score) / profile.num_ratings)
+			profile.tutor_score = round(new_tutor_score, 2)
+		profile.save()
+		messages.success(request, f'Rating successfully submitted.')
+		return redirect('profile_page', profile_id=profile.id)
 
-def showReviews(request):
-	allreviews = Comment.objects.all()
-	context = {'obj_list': allreviews}
-	return render(request, 'users/profile.html', context)
-'''
+	return render(request, 'users/review.html', {'profile':profile})
 
-class CommentCreateView(LoginRequiredMixin, CreateView):
-	model = Comment
-	form_class = FeedbackForm
-
-	def get_success_url(self):
-		reviewee = get_object_or_404(User, pk=self.kwargs['pk'])
-		return reverse('profile_page', kwargs={'profile_id': reviewee.profile.id})
-
-	def form_valid(self, form):
-		form.instance.reviewer = self.request.user
-		form.instance.reviewee = get_object_or_404(User, pk=self.kwargs['pk'])
-		return super().form_valid(form)
-
-@login_required
 def edit_profile(request, profile_id):
 	if (request.method == 'POST'):
 		user_form = UserUpdateForm(request.POST, instance=request.user)
