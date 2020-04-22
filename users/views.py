@@ -154,6 +154,16 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
 
 	def get_success_url(self):
 		reviewee = get_object_or_404(User, pk=self.kwargs['pk'])
+		profile = reviewee.profile
+		rating = float(self.object.rating)
+		if (profile.tutor_score == None):
+			profile.tutor_score = rating
+			profile.num_ratings += 1
+		else:
+			profile.num_ratings += 1
+			new_tutor_score = profile.tutor_score + ((rating - profile.tutor_score) / profile.num_ratings)
+			profile.tutor_score = round(new_tutor_score, 2)
+		profile.save()
 		return reverse('profile_page', kwargs={'profile_id': reviewee.profile.id})
 
 	def form_valid(self, form):
