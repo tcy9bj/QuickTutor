@@ -50,16 +50,25 @@
                 <th><strong>Courses</strong></th>
                 <td>{{ profile.courses }}</td>
               </tr>
-              <!-- Moved elsewhere 
-              <tr>
-                <th><strong>Status</strong></th>
-                {% if profile.active %}
-                  <td>Active</td>
-                {% else %}
-                  <td>Inactive</td>
-                {% endif %}
-              </tr>
-              -->
+              {% if user == profile.user %}
+                <tr>
+                  <th><strong>Tutor Score</strong></th>
+                  {% if profile.tutor_score == None %}
+                    <td>Try tutoring other students to accrue ratings and build your tutor score.</td>
+                  {% else %}
+                    <td>{{ profile.tutor_score }}/10 <small>based on {{profile.num_ratings}} ratings</small></td>
+                  {% endif %}
+                </tr>
+              {% else %}
+                <tr>
+                  <th><strong>Tutor Score</strong></th>
+                  {% if profile.tutor_score == None %}
+                    <td>This user currently has no Tutor Score.</td>
+                  {% else %}
+                    <td>{{ profile.tutor_score }}/10 <small>based on {{profile.num_ratings}} ratings</small></td>
+                  {% endif %}
+                </tr>
+              {% endif %}
             </tbody>
           </table>
         </div>
