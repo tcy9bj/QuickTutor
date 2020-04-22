@@ -49,7 +49,6 @@ def deactivate(request, profile_id):
 	profile = get_object_or_404(Profile, pk=profile_id)
 	profile.location = ''
 	profile.active = False
-	context = {'tutors':tutors, 'locations':tutor_locations}
 	profile.save()
 	messages.success(request, f'You have been marked as inactive; students may no longer request you as a tutor.')
 	return redirect('home')
