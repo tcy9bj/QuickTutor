@@ -149,3 +149,7 @@ def edit_profile(request, profile_id):
 		profile_form = ProfileUpdateForm(instance=request.user.profile)
 
 	return render(request, 'users/edit_profile.html', {'user_form': user_form, 'profile_form': profile_form})
+
+@login_required
+def FAQ(request):
+	return render(request, 'users/FAQ.html', {'FAQ':FAQ})
