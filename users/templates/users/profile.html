@@ -107,6 +107,9 @@
                 <div class="media-body">
                   <div class="article-metadata">
                     <a class="mr-2" href="{% url 'profile_page' comment.reviewer.profile.id %}">{{ comment.reviewer.profile.first_name }} {{ comment.reviewer.profile.last_name }}</a>
+                    {% if comment.reviewer == user %}
+                      <a class="float-right" href="{% url 'comment-delete' profile.user.id comment.id %}">delete</a>
+                    {% endif %}
                   </div>
                   <p class="article-content">{{ comment.comment_text }}</p>
                   <p class="article-title">Rating: {{ comment.rating }}/10</p>
