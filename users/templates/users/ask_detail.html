@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-    <div class="content-section mt-3">
+    <div class="content-section mt-3 mb-3">
         <div class="section-3 box">
         	{% if user == object.sender %}
         		<h2>Requested Tutor: {{ object.receiver.profile.first_name }} {{ object.receiver.profile.last_name }}</h2>
