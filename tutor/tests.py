@@ -25,6 +25,23 @@ class ViewsTest(TestCase):
 		response = self.client.get('/users/request/' + str(tutor_id) + '/')
 		self.assertIn(response.status_code, [200, 302])
 
+	def test_review_view(self):
+		tutor_id = self.user1.id
+		response = self.client.get('/users/profile/' + str(tutor_id) + '/review/')
+		self.assertEqual(response.status_code, 302)
+
+	def test_profile_view(self):
+		tutor_id = self.user1.id
+		response = self.client.get('/users/profile/' + str(tutor_id) + '/')
+		self.assertIn(response.status_code, [200, 302])
+
+	def test_FAQ_view(self):
+		response = self.client.get('/tutor/FAQ/')
+		self.assertEqual(response.status_code, 302)
+
+	def test_logout_view(self):
+		response = self.client.get('/tutor/accounts/logout/')
+		self.assertEqual(response.status_code, 302)
 
 class RequestsTest(TestCase):
 	def setUp(self):
@@ -40,6 +57,13 @@ class RequestsTest(TestCase):
 		user_request = RequestForm(data={'sender':self.user1, 'receiver':self.user2, 'course': 'CS1110', 'question': ''})
 		self.assertFalse(user_request.is_valid())
 
+	def test_request_invalid2(self):
+		user_request = RequestForm(data={'sender':self.user1, 'receiver':self.user2, 'course': '', 'question': 'Help please'})
+		self.assertFalse(user_request.is_valid())
+
+	def test_request_invalid3(self):
+		user_request = RequestForm(data={'sender':self.user1, 'receiver':self.user2, 'course': '', 'question': ''})
+		self.assertFalse(user_request.is_valid())
 
 class ActiveTutorTest(TestCase):
 	def setUp(self):
@@ -61,6 +85,14 @@ class ActiveTutorTest(TestCase):
 		profile = Profile.objects.get(id=profile_id)
 		self.assertTrue(profile.active)
 		self.assertEqual(profile.location, 'Alderman Library')
+
+	def test_noLocation_activate(self):
+		self.assertFalse(self.user.profile.active)
+		post_url = '/tutor/activate/' + str(self.user.id) + '/'
+		response = self.client.post(post_url, follow=True)
+		profile_id = self.user.profile.id
+		profile = Profile.objects.get(id=profile_id)
+		self.assertFalse(profile.active)
 
 	def test_deactivate_as_tutor(self):
 		self.user.profile.active = True
