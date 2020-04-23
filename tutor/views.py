@@ -19,14 +19,17 @@ tutor_locations = ['1515 Student Center','Alderman Library','Astronomy Building'
 				   'Other (Central Grounds)', 'Other (E-School)','Other (Med School)',
 				   'Other (North Grounds)','Other (The Corner)','Other']
 
+
 def login(request):
     return render(request, 'tutor/login.html', {})
+
 
 @login_required
 def home(request):
 	tutors = Profile.objects.filter(active=True).exclude(user=request.user)
 	context = {'tutors':tutors, 'locations':tutor_locations}
 	return render(request, 'tutor/home.html', context)
+
 
 @login_required
 def activate(request, profile_id):
@@ -43,6 +46,7 @@ def activate(request, profile_id):
 		messages.success(request, f'You have been marked as an active tutor; students may now request assistance from you.')
 	return redirect('home')
 
+
 @login_required
 def deactivate(request, profile_id):
 	tutors = Profile.objects.filter(active=True)
@@ -52,6 +56,7 @@ def deactivate(request, profile_id):
 	profile.save()
 	messages.success(request, f'You have been marked as inactive; students may no longer request you as a tutor.')
 	return redirect('home')
+
 
 @login_required
 def request(request, tutor_id):
@@ -71,6 +76,6 @@ def request(request, tutor_id):
 		form = RequestForm()
 	return render(request, 'tutor/request.html', {'form':form, 'requested_tutor_id':tutor_id})
 
-@login_required
+
 def FAQ(request):
 	return render(request, 'tutor/FAQ.html', {'FAQ':FAQ})
