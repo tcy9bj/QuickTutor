@@ -109,6 +109,15 @@ class RequestsTest(TestCase):
 		asks_post = self.user2.receiving_user.all()
 		self.assertEqual(asks_post.count(), 0)
 
+	def test_requestRender_response(self):
+		user2_id = self.user2.id
+		asks = self.user2.receiving_user.all()
+		self.assertEqual(asks.count(), 0)
+		post_data = {'user':self.user1, 'course':'', 'question':''}
+		view_url = '/tutor/request/'+str(user2_id)+'/'
+		response = self.client.post(view_url, post_data, follow=True)
+		asks_post = self.user2.receiving_user.all()
+		self.assertTemplateUsed(response, 'tutor/request.html')
 
 class ActiveTutorTest(TestCase):
 	def setUp(self):
@@ -148,3 +157,13 @@ class ActiveTutorTest(TestCase):
 		profile_id = self.user.profile.id
 		profile = Profile.objects.get(id=profile_id)
 		self.assertFalse(profile.active)
+
+	def test_activeRender_response(self):
+		self.user.profile.active = True
+		self.user.save()
+		self.assertTrue(self.user.profile.active)
+		post_url = '/tutor/deactivate/' + str(self.user.id) + '/'
+		response = self.client.post(post_url, {}, follow=True)
+		profile_id = self.user.profile.id
+		profile = Profile.objects.get(id=profile_id)
+		self.assertTemplateUsed(response, 'tutor/home.html')
