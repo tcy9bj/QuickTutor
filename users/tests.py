@@ -103,7 +103,7 @@ class ProfileTestCase(TestCase):
 
     def test_register_view_not_accept_invalid_input(self):
         self.assertFalse(self.user.profile.initialized)
-        post_data = {'user':self.user, 'username':'tester1', 'email':'tester1@gmail.com', 
+        post_data = {'user':self.user, 'username':'tester1', 'email':'tester1@gmail.com',
                      'first_name':'Joe','last_name':'Smith', 'major':'Spanish', 'major2':'Foreign Affairs',
                      'phone_number':'9092857438', 'description':'This test succeeded'}
         response = self.client.post('/users/register/', post_data, follow=True)
@@ -113,7 +113,7 @@ class ProfileTestCase(TestCase):
 
     def test_update_profile_view(self):
         profile_id = self.user.profile.id
-        post_data = {'user':self.user, 'username':'tester1', 'email':'tester1@gmail.com', 
+        post_data = {'user':self.user, 'username':'tester1', 'email':'tester1@gmail.com',
                      'first_name':'Joe','last_name':'Smith', 'major':'Spanish', 'major2':'Foreign Affairs',
                      'phone_number':'909-285-7438', 'description':'This test succeeded'}
         view_url = '/users/profile/'+str(profile_id)+'/edit/'
@@ -123,13 +123,23 @@ class ProfileTestCase(TestCase):
 
     def test_update_profile_view_not_accept_invalid_input(self):
         profile_id = self.user.profile.id
-        post_data = {'user':self.user, 'username':'tester1', 'email':'tester1@gmail.com', 
+        post_data = {'user':self.user, 'username':'tester1', 'email':'tester1@gmail.com',
                      'first_name':'','last_name':'Smith', 'major':'Spanish', 'major2':'Foreign Affairs',
                      'phone_number':'909-285-7438', 'description':'This test succeeded'}
         view_url = '/users/profile/'+str(profile_id)+'/edit/'
         response = self.client.post(view_url, post_data, follow=True)
         profile = Profile.objects.get(id=profile_id)
         self.assertEqual(profile.description, 'This is a test profile.')
+
+    def test_updateRender_response(self):
+        profile_id = self.user.profile.id
+        post_data = {'user':self.user, 'username':'tester1', 'email':'tester1@gmail.com',
+                     'first_name':'','last_name':'Smith', 'major':'Spanish', 'major2':'Foreign Affairs',
+                     'phone_number':'909-285-7438', 'description':'This test succeeded'}
+        view_url = '/users/profile/'+str(profile_id)+'/edit/'
+        response = self.client.post(view_url, post_data, follow=True)
+        profile = Profile.objects.get(id=profile_id)
+        self.assertTemplateUsed(response, 'users/edit_profile.html')
 
 
 class UserViewsTestCase(TestCase):
@@ -150,6 +160,10 @@ class UserViewsTestCase(TestCase):
         response = self.client.get('/users/inbox/')
         self.assertIn(response.status_code, [200, 302])
 
+    def test_inboxRender_response(self):
+        profile_id = self.user.profile.id
+        response = self.client.get('/users/inbox/')
+        self.assertTemplateUsed(response, 'users/inbox.html')
 
 class AskTestCase(TestCase):
     def setUp(self):
@@ -216,7 +230,6 @@ class AskTestCase(TestCase):
         response = client2.post(reverse('ask-decline', kwargs={'ask_id':self.ask.id}), follow=True)
         ask = Ask.objects.get(pk=self.ask.id)
         self.assertTrue(ask.declined)
-
 
 class CommentTestCase(TestCase):
     def setUp(self):
@@ -313,3 +326,13 @@ class CommentTestCase(TestCase):
         response = self.client.post(reverse('comment-delete', kwargs={'user_id':self.user2.id, 'pk':self.comment.id}), follow=True)
         user2 = User.objects.get(pk=self.user2.id)
         self.assertEqual(user2.profile.tutor_score, 10)
+
+    def test_commentRender_response(self):
+        self.user2.profile.tutor_score = 10
+        self.user2.profile.num_ratings = 1
+        self.user2.profile.save()
+
+        post_data = {'rating':8, 'comment_text':"This is a test comment."}
+        response = self.client.post(reverse('review', kwargs={'pk':self.user2.id}), post_data, follow=True)
+        user2 = User.objects.get(pk=self.user2.id)
+        self.assertTemplateUsed(response, 'users/profile.html')
