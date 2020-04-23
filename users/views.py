@@ -121,6 +121,25 @@ def decline_ask(request, ask_id):
 	return redirect('inbox')
 
 
+@login_required
+def edit_profile(request, profile_id):
+	if (request.method == 'POST'):
+		user_form = UserUpdateForm(request.POST, instance=request.user)
+		profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+
+		if (user_form.is_valid() and profile_form.is_valid()):
+			user_form.save()
+			profile_form.save()
+			messages.success(request, f'Your profile has been updated.')
+			return redirect('profile_page', profile_id=profile_id)
+
+	else:
+		user_form = UserUpdateForm(instance=request.user)
+		profile_form = ProfileUpdateForm(instance=request.user.profile)
+
+	return render(request, 'users/edit_profile.html', {'user_form': user_form, 'profile_form': profile_form})
+
+
 class CommentCreateView(LoginRequiredMixin, CreateView):
 	model = Comment
 	form_class = FeedbackForm
@@ -146,20 +165,32 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
 		return super().form_valid(form)
 
 
-@login_required
-def edit_profile(request, profile_id):
-	if (request.method == 'POST'):
-		user_form = UserUpdateForm(request.POST, instance=request.user)
-		profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+	model = Comment
+	template_name = 'users/comment_confirm_delete.html'
 
-		if (user_form.is_valid() and profile_form.is_valid()):
-			user_form.save()
-			profile_form.save()
-			messages.success(request, f'Your profile has been updated.')
-			return redirect('profile_page', profile_id=profile_id)
+	def delete(self, request, *args, **kwargs):
+		comment = self.get_object()
+		profile = comment.reviewee.profile
+		rating = float(comment.rating)
+		if (profile.num_ratings == 1):
+			profile.tutor_score = None
+			profile.num_ratings -= 1
+		else:
+			new_tutor_score = (profile.tutor_score - (rating / profile.num_ratings)) / (1 - (1 / profile.num_ratings))
+			profile.tutor_score = round(new_tutor_score, 2)
+			profile.num_ratings -= 1
+		profile.save()
+		return super(CommentDeleteView, self).delete(request, *args, **kwargs)
 
-	else:
-		user_form = UserUpdateForm(instance=request.user)
-		profile_form = ProfileUpdateForm(instance=request.user.profile)
+	def get_success_url(self):
+		messages.success(self.request, "Your review has been deleted.")
+		reviewee = get_object_or_404(User, pk=self.kwargs['user_id'])
+		return reverse('profile_page', kwargs={'profile_id': reviewee.profile.id})
 
-	return render(request, 'users/edit_profile.html', {'user_form': user_form, 'profile_form': profile_form})
+	def test_func(self):
+		comment = self.get_object()
+		if (self.request.user == comment.reviewer):
+			return True
+		else:
+			return False
