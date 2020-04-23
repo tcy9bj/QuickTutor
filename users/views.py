@@ -87,10 +87,6 @@ class AskCompleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 	def test_func(self):
 		ask = self.get_object()
-		print(self.request.user)
-		print(ask.receiver)
-		print(self.request.user.profile.current_client)
-		print(ask.sender)
 		if (self.request.user == ask.receiver and self.request.user.profile.current_client == ask):
 			return True
 		else:
