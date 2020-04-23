@@ -20,7 +20,7 @@ class UpdateFormsTestCase(TestCase):
 
     def test_ProfileUpdateForm_valid(self):
         '''Tests that the ProfileUpdateForm takes valid input'''
-        form_data = {'first_name':'Joe', 'last_name':'Smith', 'major':'Spanish', 'major2':'Foreign Affairs', 
+        form_data = {'first_name':'Joe', 'last_name':'Smith', 'major':'Spanish', 'major2':'Foreign Affairs',
                      'courses':'SPAN 1060', 'phone_number':'909-285-7438', 'description':'This is a test profile.'}
         profile_form = ProfileUpdateForm(data=form_data)
         self.assertTrue(profile_form.is_valid())
@@ -39,14 +39,14 @@ class UpdateFormsTestCase(TestCase):
         -Tests that the ProfileUpdateForm rejects invalid input
         -invalid test input: Improper phone number format
         '''
-        form_data = {'first_name':'Joe', 'last_name':'Smith', 'major':'Spanish', 'major2':'Foreign Affairs', 
+        form_data = {'first_name':'Joe', 'last_name':'Smith', 'major':'Spanish', 'major2':'Foreign Affairs',
                      'phone_number':'9092857438','description':'This is a test profile.'}
         profile_form = ProfileUpdateForm(data=form_data)
         self.assertFalse(profile_form.is_valid())
 
     def test_ProfileUpdateForm_valid_only_required_fields(self):
         '''Tests that the ProfileUpdateForm is still valid when non-required fields are left blank'''
-        form_data = {'first_name':'Joe', 'last_name':'Smith', 'major':'Spanish', 
+        form_data = {'first_name':'Joe', 'last_name':'Smith', 'major':'Spanish',
                      'phone_number':'909-285-7438'}
         profile_form = ProfileUpdateForm(data=form_data)
         self.assertTrue(profile_form.is_valid())
@@ -92,7 +92,7 @@ class ProfileTestCase(TestCase):
 
     def test_register_view_fills_out_new_user_profiles(self):
         self.assertFalse(self.user.profile.initialized)
-        post_data = {'user':self.user, 'username':'tester1', 'email':'tester1@gmail.com', 
+        post_data = {'user':self.user, 'username':'tester1', 'email':'tester1@gmail.com',
                      'first_name':'Joe','last_name':'Smith', 'major':'Spanish', 'major2':'Foreign Affairs',
                      'phone_number':'909-285-7438', 'description':'This test succeeded'}
         response = self.client.post('/users/register/', post_data, follow=True)
