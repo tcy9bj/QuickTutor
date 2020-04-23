@@ -31,11 +31,13 @@ def register(request):
 	else:
 		return redirect('home')
 
+
 @login_required
 def profile_page(request, profile_id):
 	profile = get_object_or_404(Profile, pk=profile_id)
 	comments = profile.user.reviewee.all()
 	return render(request, 'users/profile.html', {'profile':profile, 'comments':comments})
+
 
 @login_required
 def inbox(request):
@@ -47,9 +49,11 @@ def inbox(request):
 	}
 	return render(request, 'users/inbox.html', context)
 
+
 class AskDetailView(LoginRequiredMixin, DetailView):
 	model = Ask
 	template_name = 'users/ask_detail.html'
+
 
 class AskDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 	model = Ask
@@ -68,6 +72,7 @@ class AskDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 			return True
 		else:
 			return False
+
 
 class AskCompleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 	model = Ask
@@ -91,6 +96,7 @@ class AskCompleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 		else:
 			return False
 
+
 @login_required
 def accept_ask(request, ask_id):
 	ask = get_object_or_404(Ask, pk=ask_id)
@@ -105,6 +111,7 @@ def accept_ask(request, ask_id):
 	messages.success(request, "You have accepted " + ask.sender.profile.first_name + "'s request for tutoring. You can view his contact information under the current client section.")
 	return redirect('inbox')
 
+
 @login_required
 def decline_ask(request, ask_id):
 	ask = get_object_or_404(Ask, pk=ask_id)
@@ -113,40 +120,6 @@ def decline_ask(request, ask_id):
 	messages.info(request, f"You have declined " + ask.sender.profile.first_name + "'s request.")
 	return redirect('inbox')
 
-'''
-@login_required
-def review(request, profile_id):
-	if request.method == 'POST':
-		form = FeedbackForm(request.POST)
-		rating = request.POST.get('rating')
-		profile = get_object_or_404(Profile, pk=profile_id)
-		if(rating == ""):
-			return render(request, 'users/review.html', {'profile':profile, 'error_message':"Please enter a valid rating."})
-		if form.is_valid():
-			rating = float(rating)
-			if (profile.tutor_score == None):
-				profile.tutor_score = rating
-				profile.num_ratings += 1
-			else:
-				profile.num_ratings += 1
-				new_tutor_score = profile.tutor_score + ((rating - profile.tutor_score) / profile.num_ratings)
-				profile.tutor_score = round(new_tutor_score, 2)
-			profile.save()
-			# reviewer = request.user.profile_id
-			post = form.save(commit=False)
-			post.author = request.user
-			post.save()
-			messages.success(request, f'Rating successfully submitted.')
-			return redirect('profile_page', profile_id=profile_id)
-	else:
-		form = FeedbackForm()
-	return render(request, 'users/review.html', {'form':form})
-
-def showReviews(request):
-	allreviews = Comment.objects.all()
-	context = {'obj_list': allreviews}
-	return render(request, 'users/profile.html', context)
-'''
 
 class CommentCreateView(LoginRequiredMixin, CreateView):
 	model = Comment
@@ -164,12 +137,14 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
 			new_tutor_score = profile.tutor_score + ((rating - profile.tutor_score) / profile.num_ratings)
 			profile.tutor_score = round(new_tutor_score, 2)
 		profile.save()
+		messages.success(self.request, "Your review has been submitted.")
 		return reverse('profile_page', kwargs={'profile_id': reviewee.profile.id})
 
 	def form_valid(self, form):
 		form.instance.reviewer = self.request.user
 		form.instance.reviewee = get_object_or_404(User, pk=self.kwargs['pk'])
 		return super().form_valid(form)
+
 
 @login_required
 def edit_profile(request, profile_id):
@@ -188,4 +163,3 @@ def edit_profile(request, profile_id):
 		profile_form = ProfileUpdateForm(instance=request.user.profile)
 
 	return render(request, 'users/edit_profile.html', {'user_form': user_form, 'profile_form': profile_form})
-
