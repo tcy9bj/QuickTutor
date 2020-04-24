@@ -1,4 +1,3 @@
-#Some code from: https://medium.com/@jainsahil1997/simple-google-authentication-in-django-58101a34736b
 from django import forms
 from .models import Profile, Comment
 from django.contrib.auth.models import User
